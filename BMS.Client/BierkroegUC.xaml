@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="BMS.Client.BierkroegUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMS.Client"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" Width="480">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" FlowDirection="LeftToRight"  >
+            <Button Margin="5" Padding="5,0,5,0" Content="+" Width="20" Click="BierkroegNieuw"/>
+            <ComboBox x:Name="cbBierkroeg" DisplayMemberPath="Naam" SelectedValuePath="Id" Width="100"  Margin="0,5,0,5" SelectionChanged="cbBierkroeg_SelectionChanged"/>
+            <Button Margin="5" Padding="5,0,5,0" Content="Producten" Width="70" Click="ProductenClick"/>
+        </WrapPanel>
+        <Button Grid.Row="1" Margin="5" Padding="5,0,5,0" Width="20" HorizontalAlignment="Left" Content="+" Click="NieuweDagClick"/>
+        <Button Grid.Row="1" Margin="30,5,0,5" Padding="5,0,5,0" Width="50" HorizontalAlignment="Left" Content="Totaal" Click="TotaalDagenClick"/>
+        <WrapPanel x:Name="wpDagen" Grid.Row="1" FlowDirection="LeftToRight" Margin="85,0,0,0"  />
+    </Grid>
+</UserControl>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2019 18:14:50
+-- Date Created: 06/02/2019 21:04:56
 -- Generated from EDMX file: C:\Projects\BMS\BMS.DA\BMSModel.edmx
 -- --------------------------------------------------
 
@@ -17,35 +17,23 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_BierkroegDag]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_BierkroegDag];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OpdienerDag]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_OpdienerDag];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OpdienerBestelling]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Bestellings] DROP CONSTRAINT [FK_OpdienerBestelling];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DagBestelling]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Bestellings] DROP CONSTRAINT [FK_DagBestelling];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BestellingBestellingPrutuct]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BestellingProtucts] DROP CONSTRAINT [FK_BestellingBestellingPrutuct];
+    ALTER TABLE [dbo].[BestellingProtucten] DROP CONSTRAINT [FK_BestellingBestellingPrutuct];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BierTypeBier]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BierTypeBier];
+    ALTER TABLE [dbo].[Producten_Bier] DROP CONSTRAINT [FK_BierTypeBier];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BierGistingBier]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BierGistingBier];
+    ALTER TABLE [dbo].[Producten_Bier] DROP CONSTRAINT [FK_BierGistingBier];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BrouwerijBier]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BrouwerijBier];
+    ALTER TABLE [dbo].[Producten_Bier] DROP CONSTRAINT [FK_BrouwerijBier];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductCategorieProduct]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_ProductCategorieProduct];
+    ALTER TABLE [dbo].[Producten] DROP CONSTRAINT [FK_ProductCategorieProduct];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BestellingPrutuctProduct]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_BestellingPrutuctProduct];
+    ALTER TABLE [dbo].[Producten] DROP CONSTRAINT [FK_BestellingPrutuctProduct];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductBierkroeg_Product]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductBierkroeg] DROP CONSTRAINT [FK_ProductBierkroeg_Product];
@@ -53,8 +41,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductBierkroeg_Bierkroeg]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ProductBierkroeg] DROP CONSTRAINT [FK_ProductBierkroeg_Bierkroeg];
 GO
+IF OBJECT_ID(N'[dbo].[FK_BierkroegDag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_BierkroegDag];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpdienerBestelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bestellingen] DROP CONSTRAINT [FK_OpdienerBestelling];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DagBestelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bestellingen] DROP CONSTRAINT [FK_DagBestelling];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Bier_inherits_Product]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_Bier_inherits_Product];
+    ALTER TABLE [dbo].[Producten_Bier] DROP CONSTRAINT [FK_Bier_inherits_Product];
 GO
 
 -- --------------------------------------------------
@@ -67,32 +64,32 @@ GO
 IF OBJECT_ID(N'[dbo].[Dagen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Dagen];
 GO
-IF OBJECT_ID(N'[dbo].[Opdieners]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Opdieners];
+IF OBJECT_ID(N'[dbo].[Opdieneren]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Opdieneren];
 GO
-IF OBJECT_ID(N'[dbo].[Bestellings]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Bestellings];
+IF OBJECT_ID(N'[dbo].[Bestellingen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Bestellingen];
 GO
-IF OBJECT_ID(N'[dbo].[BestellingProtucts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BestellingProtucts];
+IF OBJECT_ID(N'[dbo].[BestellingProtucten]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BestellingProtucten];
 GO
-IF OBJECT_ID(N'[dbo].[ProductCategories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ProductCategories];
+IF OBJECT_ID(N'[dbo].[ProductCategorieen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductCategorieen];
 GO
 IF OBJECT_ID(N'[dbo].[BierTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BierTypes];
 GO
-IF OBJECT_ID(N'[dbo].[BierGistings]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BierGistings];
+IF OBJECT_ID(N'[dbo].[BierGistingen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BierGistingen];
 GO
-IF OBJECT_ID(N'[dbo].[Brouwerijs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Brouwerijs];
+IF OBJECT_ID(N'[dbo].[Brouwerijen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Brouwerijen];
 GO
-IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Products];
+IF OBJECT_ID(N'[dbo].[Producten]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Producten];
 GO
-IF OBJECT_ID(N'[dbo].[Products_Bier]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Products_Bier];
+IF OBJECT_ID(N'[dbo].[Producten_Bier]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Producten_Bier];
 GO
 IF OBJECT_ID(N'[dbo].[ProductBierkroeg]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ProductBierkroeg];
@@ -113,38 +110,37 @@ GO
 CREATE TABLE [dbo].[Dagen] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Naam] nvarchar(max)  NOT NULL,
-    [TS] datetime  NOT NULL,
-    [BierkroegId] int  NOT NULL,
-    [OpdienerId] int  NOT NULL
+    [TS] datetime  NULL,
+    [BierkroegId] int  NOT NULL
 );
 GO
 
--- Creating table 'Opdieners'
-CREATE TABLE [dbo].[Opdieners] (
+-- Creating table 'Opdieneren'
+CREATE TABLE [dbo].[Opdieneren] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Naam] nvarchar(max)  NOT NULL,
-    [TS] datetime  NOT NULL
+    [TS] datetime  NULL
 );
 GO
 
--- Creating table 'Bestellings'
-CREATE TABLE [dbo].[Bestellings] (
+-- Creating table 'Bestellingen'
+CREATE TABLE [dbo].[Bestellingen] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Tafel] nvarchar(max)  NOT NULL,
     [Totaal] decimal(18,0)  NOT NULL,
     [IsBezorcht] bit  NOT NULL,
-    [IsBezorchtTS] datetime  NOT NULL,
+    [IsBezorchtTS] datetime  NULL,
     [IsKlaarKeuken] bit  NOT NULL,
-    [IsKlaarKeukenTS] datetime  NOT NULL,
+    [IsKlaarKeukenTS] datetime  NULL,
     [IsPrinted] bit  NOT NULL,
+    [TS] datetime  NULL,
     [OpdienerId] int  NOT NULL,
-    [DagId] int  NOT NULL,
-    [TS] datetime  NOT NULL
+    [DagId] int  NOT NULL
 );
 GO
 
--- Creating table 'BestellingProtucts'
-CREATE TABLE [dbo].[BestellingProtucts] (
+-- Creating table 'BestellingProtucten'
+CREATE TABLE [dbo].[BestellingProtucten] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Aantal] smallint  NOT NULL,
     [Totaal] nvarchar(max)  NOT NULL,
@@ -153,8 +149,8 @@ CREATE TABLE [dbo].[BestellingProtucts] (
 );
 GO
 
--- Creating table 'ProductCategories'
-CREATE TABLE [dbo].[ProductCategories] (
+-- Creating table 'ProductCategorieen'
+CREATE TABLE [dbo].[ProductCategorieen] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Naam] nvarchar(max)  NOT NULL,
     [Isbier] bit  NOT NULL
@@ -168,15 +164,15 @@ CREATE TABLE [dbo].[BierTypes] (
 );
 GO
 
--- Creating table 'BierGistings'
-CREATE TABLE [dbo].[BierGistings] (
+-- Creating table 'BierGistingen'
+CREATE TABLE [dbo].[BierGistingen] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Gisting] nvarchar(max)  NOT NULL
 );
 GO
 
--- Creating table 'Brouwerijs'
-CREATE TABLE [dbo].[Brouwerijs] (
+-- Creating table 'Brouwerijen'
+CREATE TABLE [dbo].[Brouwerijen] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Naam] nvarchar(max)  NOT NULL,
     [Locatie] nvarchar(max)  NOT NULL,
@@ -184,22 +180,21 @@ CREATE TABLE [dbo].[Brouwerijs] (
 );
 GO
 
--- Creating table 'Products'
-CREATE TABLE [dbo].[Products] (
+-- Creating table 'Producten'
+CREATE TABLE [dbo].[Producten] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [ProductNaam] nvarchar(max)  NOT NULL,
     [Prijs] decimal(10,2)  NOT NULL,
     [Beschrijving] nvarchar(max)  NULL,
     [InVoorraad] bit  NOT NULL,
-    [TS] int  NULL,
     [IMG] varbinary(max)  NULL,
     [ProductCategorieId] int  NOT NULL,
     [BestellingProtuctId] int  NOT NULL
 );
 GO
 
--- Creating table 'Products_Bier'
-CREATE TABLE [dbo].[Products_Bier] (
+-- Creating table 'Producten_Bier'
+CREATE TABLE [dbo].[Producten_Bier] (
     [Alcohol] decimal(10,2)  NOT NULL,
     [Inhoud] decimal(10,2)  NOT NULL,
     [Aantal] int  NOT NULL,
@@ -233,27 +228,27 @@ ADD CONSTRAINT [PK_Dagen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Opdieners'
-ALTER TABLE [dbo].[Opdieners]
-ADD CONSTRAINT [PK_Opdieners]
+-- Creating primary key on [Id] in table 'Opdieneren'
+ALTER TABLE [dbo].[Opdieneren]
+ADD CONSTRAINT [PK_Opdieneren]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Bestellings'
-ALTER TABLE [dbo].[Bestellings]
-ADD CONSTRAINT [PK_Bestellings]
+-- Creating primary key on [Id] in table 'Bestellingen'
+ALTER TABLE [dbo].[Bestellingen]
+ADD CONSTRAINT [PK_Bestellingen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'BestellingProtucts'
-ALTER TABLE [dbo].[BestellingProtucts]
-ADD CONSTRAINT [PK_BestellingProtucts]
+-- Creating primary key on [Id] in table 'BestellingProtucten'
+ALTER TABLE [dbo].[BestellingProtucten]
+ADD CONSTRAINT [PK_BestellingProtucten]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProductCategories'
-ALTER TABLE [dbo].[ProductCategories]
-ADD CONSTRAINT [PK_ProductCategories]
+-- Creating primary key on [Id] in table 'ProductCategorieen'
+ALTER TABLE [dbo].[ProductCategorieen]
+ADD CONSTRAINT [PK_ProductCategorieen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -263,27 +258,27 @@ ADD CONSTRAINT [PK_BierTypes]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'BierGistings'
-ALTER TABLE [dbo].[BierGistings]
-ADD CONSTRAINT [PK_BierGistings]
+-- Creating primary key on [Id] in table 'BierGistingen'
+ALTER TABLE [dbo].[BierGistingen]
+ADD CONSTRAINT [PK_BierGistingen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Brouwerijs'
-ALTER TABLE [dbo].[Brouwerijs]
-ADD CONSTRAINT [PK_Brouwerijs]
+-- Creating primary key on [Id] in table 'Brouwerijen'
+ALTER TABLE [dbo].[Brouwerijen]
+ADD CONSTRAINT [PK_Brouwerijen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Products'
-ALTER TABLE [dbo].[Products]
-ADD CONSTRAINT [PK_Products]
+-- Creating primary key on [Id] in table 'Producten'
+ALTER TABLE [dbo].[Producten]
+ADD CONSTRAINT [PK_Producten]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Products_Bier'
-ALTER TABLE [dbo].[Products_Bier]
-ADD CONSTRAINT [PK_Products_Bier]
+-- Creating primary key on [Id] in table 'Producten_Bier'
+ALTER TABLE [dbo].[Producten_Bier]
+ADD CONSTRAINT [PK_Producten_Bier]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -297,83 +292,23 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [BierkroegId] in table 'Dagen'
-ALTER TABLE [dbo].[Dagen]
-ADD CONSTRAINT [FK_BierkroegDag]
-    FOREIGN KEY ([BierkroegId])
-    REFERENCES [dbo].[Bierkroegen]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BierkroegDag'
-CREATE INDEX [IX_FK_BierkroegDag]
-ON [dbo].[Dagen]
-    ([BierkroegId]);
-GO
-
--- Creating foreign key on [OpdienerId] in table 'Dagen'
-ALTER TABLE [dbo].[Dagen]
-ADD CONSTRAINT [FK_OpdienerDag]
-    FOREIGN KEY ([OpdienerId])
-    REFERENCES [dbo].[Opdieners]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OpdienerDag'
-CREATE INDEX [IX_FK_OpdienerDag]
-ON [dbo].[Dagen]
-    ([OpdienerId]);
-GO
-
--- Creating foreign key on [OpdienerId] in table 'Bestellings'
-ALTER TABLE [dbo].[Bestellings]
-ADD CONSTRAINT [FK_OpdienerBestelling]
-    FOREIGN KEY ([OpdienerId])
-    REFERENCES [dbo].[Opdieners]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OpdienerBestelling'
-CREATE INDEX [IX_FK_OpdienerBestelling]
-ON [dbo].[Bestellings]
-    ([OpdienerId]);
-GO
-
--- Creating foreign key on [DagId] in table 'Bestellings'
-ALTER TABLE [dbo].[Bestellings]
-ADD CONSTRAINT [FK_DagBestelling]
-    FOREIGN KEY ([DagId])
-    REFERENCES [dbo].[Dagen]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_DagBestelling'
-CREATE INDEX [IX_FK_DagBestelling]
-ON [dbo].[Bestellings]
-    ([DagId]);
-GO
-
--- Creating foreign key on [BestellingId] in table 'BestellingProtucts'
-ALTER TABLE [dbo].[BestellingProtucts]
+-- Creating foreign key on [BestellingId] in table 'BestellingProtucten'
+ALTER TABLE [dbo].[BestellingProtucten]
 ADD CONSTRAINT [FK_BestellingBestellingPrutuct]
     FOREIGN KEY ([BestellingId])
-    REFERENCES [dbo].[Bestellings]
+    REFERENCES [dbo].[Bestellingen]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BestellingBestellingPrutuct'
 CREATE INDEX [IX_FK_BestellingBestellingPrutuct]
-ON [dbo].[BestellingProtucts]
+ON [dbo].[BestellingProtucten]
     ([BestellingId]);
 GO
 
--- Creating foreign key on [BierTypeId] in table 'Products_Bier'
-ALTER TABLE [dbo].[Products_Bier]
+-- Creating foreign key on [BierTypeId] in table 'Producten_Bier'
+ALTER TABLE [dbo].[Producten_Bier]
 ADD CONSTRAINT [FK_BierTypeBier]
     FOREIGN KEY ([BierTypeId])
     REFERENCES [dbo].[BierTypes]
@@ -383,67 +318,67 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BierTypeBier'
 CREATE INDEX [IX_FK_BierTypeBier]
-ON [dbo].[Products_Bier]
+ON [dbo].[Producten_Bier]
     ([BierTypeId]);
 GO
 
--- Creating foreign key on [BierGistingId] in table 'Products_Bier'
-ALTER TABLE [dbo].[Products_Bier]
+-- Creating foreign key on [BierGistingId] in table 'Producten_Bier'
+ALTER TABLE [dbo].[Producten_Bier]
 ADD CONSTRAINT [FK_BierGistingBier]
     FOREIGN KEY ([BierGistingId])
-    REFERENCES [dbo].[BierGistings]
+    REFERENCES [dbo].[BierGistingen]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BierGistingBier'
 CREATE INDEX [IX_FK_BierGistingBier]
-ON [dbo].[Products_Bier]
+ON [dbo].[Producten_Bier]
     ([BierGistingId]);
 GO
 
--- Creating foreign key on [BrouwerijId] in table 'Products_Bier'
-ALTER TABLE [dbo].[Products_Bier]
+-- Creating foreign key on [BrouwerijId] in table 'Producten_Bier'
+ALTER TABLE [dbo].[Producten_Bier]
 ADD CONSTRAINT [FK_BrouwerijBier]
     FOREIGN KEY ([BrouwerijId])
-    REFERENCES [dbo].[Brouwerijs]
+    REFERENCES [dbo].[Brouwerijen]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BrouwerijBier'
 CREATE INDEX [IX_FK_BrouwerijBier]
-ON [dbo].[Products_Bier]
+ON [dbo].[Producten_Bier]
     ([BrouwerijId]);
 GO
 
--- Creating foreign key on [ProductCategorieId] in table 'Products'
-ALTER TABLE [dbo].[Products]
+-- Creating foreign key on [ProductCategorieId] in table 'Producten'
+ALTER TABLE [dbo].[Producten]
 ADD CONSTRAINT [FK_ProductCategorieProduct]
     FOREIGN KEY ([ProductCategorieId])
-    REFERENCES [dbo].[ProductCategories]
+    REFERENCES [dbo].[ProductCategorieen]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProductCategorieProduct'
 CREATE INDEX [IX_FK_ProductCategorieProduct]
-ON [dbo].[Products]
+ON [dbo].[Producten]
     ([ProductCategorieId]);
 GO
 
--- Creating foreign key on [BestellingProtuctId] in table 'Products'
-ALTER TABLE [dbo].[Products]
+-- Creating foreign key on [BestellingProtuctId] in table 'Producten'
+ALTER TABLE [dbo].[Producten]
 ADD CONSTRAINT [FK_BestellingPrutuctProduct]
     FOREIGN KEY ([BestellingProtuctId])
-    REFERENCES [dbo].[BestellingProtucts]
+    REFERENCES [dbo].[BestellingProtucten]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BestellingPrutuctProduct'
 CREATE INDEX [IX_FK_BestellingPrutuctProduct]
-ON [dbo].[Products]
+ON [dbo].[Producten]
     ([BestellingProtuctId]);
 GO
 
@@ -451,7 +386,7 @@ GO
 ALTER TABLE [dbo].[ProductBierkroeg]
 ADD CONSTRAINT [FK_ProductBierkroeg_Product]
     FOREIGN KEY ([Producten_Id])
-    REFERENCES [dbo].[Products]
+    REFERENCES [dbo].[Producten]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -471,11 +406,56 @@ ON [dbo].[ProductBierkroeg]
     ([Bierkroegen_Id]);
 GO
 
--- Creating foreign key on [Id] in table 'Products_Bier'
-ALTER TABLE [dbo].[Products_Bier]
+-- Creating foreign key on [BierkroegId] in table 'Dagen'
+ALTER TABLE [dbo].[Dagen]
+ADD CONSTRAINT [FK_BierkroegDag]
+    FOREIGN KEY ([BierkroegId])
+    REFERENCES [dbo].[Bierkroegen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BierkroegDag'
+CREATE INDEX [IX_FK_BierkroegDag]
+ON [dbo].[Dagen]
+    ([BierkroegId]);
+GO
+
+-- Creating foreign key on [OpdienerId] in table 'Bestellingen'
+ALTER TABLE [dbo].[Bestellingen]
+ADD CONSTRAINT [FK_OpdienerBestelling]
+    FOREIGN KEY ([OpdienerId])
+    REFERENCES [dbo].[Opdieneren]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OpdienerBestelling'
+CREATE INDEX [IX_FK_OpdienerBestelling]
+ON [dbo].[Bestellingen]
+    ([OpdienerId]);
+GO
+
+-- Creating foreign key on [DagId] in table 'Bestellingen'
+ALTER TABLE [dbo].[Bestellingen]
+ADD CONSTRAINT [FK_DagBestelling]
+    FOREIGN KEY ([DagId])
+    REFERENCES [dbo].[Dagen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DagBestelling'
+CREATE INDEX [IX_FK_DagBestelling]
+ON [dbo].[Bestellingen]
+    ([DagId]);
+GO
+
+-- Creating foreign key on [Id] in table 'Producten_Bier'
+ALTER TABLE [dbo].[Producten_Bier]
 ADD CONSTRAINT [FK_Bier_inherits_Product]
     FOREIGN KEY ([Id])
-    REFERENCES [dbo].[Products]
+    REFERENCES [dbo].[Producten]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO

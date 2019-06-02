@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BMS.DA;
 
 namespace BMS.Client
 {
@@ -20,9 +21,51 @@ namespace BMS.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        BMSModelContainer _db;
+        UserControl _uc;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ContentRenderd(object sender, EventArgs e)
+        {
+            _db = new BMSModelContainer();
+        }
+
+
+        void changeUI(string page = "Bierkroeg")
+        {
+            g_Placeholder.Children.Clear();
+            switch (page)
+            {
+                case "Dag":
+                    //_uc = new ProductenUC(_db);
+               break;
+                default:
+                     _uc = new BierkroegUC(_db);
+                break;
+            }
+            _uc.Height = g_Placeholder.Height;
+            _uc.Width = g_Placeholder.Width;
+            g_Placeholder.Children.Add(_uc);
+        }
+
+        private void Bierkroeg_Click(object sender, RoutedEventArgs e)
+        {
+            changeUI();
+        }
+
+        private void Opdieners_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Producten_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

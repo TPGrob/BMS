@@ -27,13 +27,13 @@ namespace BMS.DA
     
         public virtual DbSet<Bierkroeg> Bierkroegen { get; set; }
         public virtual DbSet<Dag> Dagen { get; set; }
-        public virtual DbSet<Opdiener> Opdieners { get; set; }
-        public virtual DbSet<Bestelling> Bestellings { get; set; }
-        public virtual DbSet<BestellingProtuct> BestellingProtucts { get; set; }
-        public virtual DbSet<ProductCategorie> ProductCategories { get; set; }
+        public virtual DbSet<Opdiener> Opdieneren { get; set; }
+        public virtual DbSet<Bestelling> Bestellingen { get; set; }
+        public virtual DbSet<BestellingProtuct> BestellingProtucten { get; set; }
+        public virtual DbSet<ProductCategorie> ProductCategorieen { get; set; }
         public virtual DbSet<BierType> BierTypes { get; set; }
-        public virtual DbSet<BierGisting> BierGistings { get; set; }
-        public virtual DbSet<Brouwerij> Brouwerijs { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<BierGisting> BierGistingen { get; set; }
+        public virtual DbSet<Brouwerij> Brouwerijen { get; set; }
+        public virtual DbSet<Product> Producten { get; set; }
     }
 }

@@ -24,17 +24,17 @@ namespace BMS.DA
         public string Tafel { get; set; }
         public decimal Totaal { get; set; }
         public bool IsBezorcht { get; set; }
-        public System.DateTime IsBezorchtTS { get; set; }
+        public Nullable<System.DateTime> IsBezorchtTS { get; set; }
         public bool IsKlaarKeuken { get; set; }
-        public System.DateTime IsKlaarKeukenTS { get; set; }
+        public Nullable<System.DateTime> IsKlaarKeukenTS { get; set; }
         public bool IsPrinted { get; set; }
+        public Nullable<System.DateTime> TS { get; set; }
         public int OpdienerId { get; set; }
         public int DagId { get; set; }
-        public System.DateTime TS { get; set; }
     
-        public virtual Opdiener Opdiener { get; set; }
-        public virtual Dag Dag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BestellingProtuct> BestellingPrutucten { get; set; }
+        public virtual Opdiener Opdiener { get; set; }
+        public virtual Dag Dag { get; set; }
     }
 }

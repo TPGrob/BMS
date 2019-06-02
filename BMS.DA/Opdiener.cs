@@ -17,16 +17,13 @@ namespace BMS.DA
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Opdiener()
         {
-            this.Dagen = new HashSet<Dag>();
             this.Bestellingen = new HashSet<Bestelling>();
         }
     
         public int Id { get; set; }
         public string Naam { get; set; }
-        public System.DateTime TS { get; set; }
+        public Nullable<System.DateTime> TS { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dag> Dagen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bestelling> Bestellingen { get; set; }
     }

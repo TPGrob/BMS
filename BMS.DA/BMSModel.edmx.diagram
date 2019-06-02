@@ -7,12 +7,8 @@
       <Diagram DiagramId="c9920c5ea7594e71b1fb7c6347827bd9" Name="Diagram1" ZoomLevel="101" >
         <EntityTypeShape EntityType="BMSModel.Bierkroeg" Width="1.5" PointX="1.125" PointY="2.75" />
         <EntityTypeShape EntityType="BMSModel.Dag" Width="1.5" PointX="3.375" PointY="3.75" />
-        <AssociationConnector Association="BMSModel.BierkroegDag" />
         <EntityTypeShape EntityType="BMSModel.Opdiener" Width="1.5" PointX="1.125" PointY="5" />
-        <AssociationConnector Association="BMSModel.OpdienerDag" />
         <EntityTypeShape EntityType="BMSModel.Bestelling" Width="1.75" PointX="5.625" PointY="3.75" />
-        <AssociationConnector Association="BMSModel.OpdienerBestelling" />
-        <AssociationConnector Association="BMSModel.DagBestelling" />
         <EntityTypeShape EntityType="BMSModel.BestellingProtuct" Width="1.5" PointX="8.125" PointY="3.75" />
         <AssociationConnector Association="BMSModel.BestellingBestellingPrutuct" />
         <EntityTypeShape EntityType="BMSModel.ProductCategorie" Width="1.75" PointX="10.375" PointY="0.5" />
@@ -28,6 +24,9 @@
         <AssociationConnector Association="BMSModel.ProductCategorieProduct" />
         <AssociationConnector Association="BMSModel.BestellingPrutuctProduct" />
         <AssociationConnector Association="BMSModel.ProductBierkroeg" />
+        <AssociationConnector Association="BMSModel.BierkroegDag" />
+        <AssociationConnector Association="BMSModel.OpdienerBestelling" />
+        <AssociationConnector Association="BMSModel.DagBestelling" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,12 +22,10 @@ namespace BMS.DA
     
         public int Id { get; set; }
         public string Naam { get; set; }
-        public System.DateTime TS { get; set; }
+        public Nullable<System.DateTime> TS { get; set; }
         public int BierkroegId { get; set; }
-        public int OpdienerId { get; set; }
     
         public virtual Bierkroeg Bierkroeg { get; set; }
-        public virtual Opdiener Opdiener { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bestelling> Bestellingen { get; set; }
     }

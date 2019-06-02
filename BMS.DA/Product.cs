@@ -25,7 +25,6 @@ namespace BMS.DA
         public decimal Prijs { get; set; }
         public string Beschrijving { get; set; }
         public bool InVoorraad { get; set; }
-        public Nullable<int> TS { get; set; }
         public byte[] IMG { get; set; }
         public int ProductCategorieId { get; set; }
         public int BestellingProtuctId { get; set; }
