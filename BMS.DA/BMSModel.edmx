@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BMSModelStoreContainer">
+    <EntitySet Name="Bierkroegen" EntityType="BMSModel.Store.Bierkroegen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Dagen" EntityType="BMSModel.Store.Dagen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opdieners" EntityType="BMSModel.Store.Opdieners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bestellings" EntityType="BMSModel.Store.Bestellings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BestellingProtucts" EntityType="BMSModel.Store.BestellingProtucts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCategories" EntityType="BMSModel.Store.ProductCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BierTypes" EntityType="BMSModel.Store.BierTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BierGistings" EntityType="BMSModel.Store.BierGistings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Brouwerijs" EntityType="BMSModel.Store.Brouwerijs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="BMSModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Bier" EntityType="BMSModel.Store.Products_Bier" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductBierkroeg" EntityType="BMSModel.Store.ProductBierkroeg" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="BierkroegDag" Association="BMSModel.Store.BierkroegDag">
+      <End Role="Bierkroeg" EntitySet="Bierkroegen" />
+      <End Role="Dag" EntitySet="Dagen" />
+    </AssociationSet>
+    <AssociationSet Name="OpdienerDag" Association="BMSModel.Store.OpdienerDag">
+      <End Role="Opdiener" EntitySet="Opdieners" />
+      <End Role="Dag" EntitySet="Dagen" />
+    </AssociationSet>
+    <AssociationSet Name="OpdienerBestelling" Association="BMSModel.Store.OpdienerBestelling">
+      <End Role="Opdiener" EntitySet="Opdieners" />
+      <End Role="Bestelling" EntitySet="Bestellings" />
+    </AssociationSet>
+    <AssociationSet Name="DagBestelling" Association="BMSModel.Store.DagBestelling">
+      <End Role="Dag" EntitySet="Dagen" />
+      <End Role="Bestelling" EntitySet="Bestellings" />
+    </AssociationSet>
+    <AssociationSet Name="BestellingBestellingPrutuct" Association="BMSModel.Store.BestellingBestellingPrutuct">
+      <End Role="Bestelling" EntitySet="Bestellings" />
+      <End Role="BestellingPrutuct" EntitySet="BestellingProtucts" />
+    </AssociationSet>
+    <AssociationSet Name="BierTypeBier" Association="BMSModel.Store.BierTypeBier">
+      <End Role="BierType" EntitySet="BierTypes" />
+      <End Role="Bier" EntitySet="Products_Bier" />
+    </AssociationSet>
+    <AssociationSet Name="BierGistingBier" Association="BMSModel.Store.BierGistingBier">
+      <End Role="BierGisting" EntitySet="BierGistings" />
+      <End Role="Bier" EntitySet="Products_Bier" />
+    </AssociationSet>
+    <AssociationSet Name="BrouwerijBier" Association="BMSModel.Store.BrouwerijBier">
+      <End Role="Brouwerij" EntitySet="Brouwerijs" />
+      <End Role="Bier" EntitySet="Products_Bier" />
+    </AssociationSet>
+    <AssociationSet Name="ProductCategorieProduct" Association="BMSModel.Store.ProductCategorieProduct">
+      <End Role="ProductCategorie" EntitySet="ProductCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="BestellingPrutuctProduct" Association="BMSModel.Store.BestellingPrutuctProduct">
+      <End Role="BestellingPrutuct" EntitySet="BestellingProtucts" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBierkroeg_Product" Association="BMSModel.Store.FK_ProductBierkroeg_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductBierkroeg" EntitySet="ProductBierkroeg" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBierkroeg_Bierkroeg" Association="BMSModel.Store.FK_ProductBierkroeg_Bierkroeg">
+      <End Role="Bierkroeg" EntitySet="Bierkroegen" />
+      <End Role="ProductBierkroeg" EntitySet="ProductBierkroeg" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bier_inherits_Product" Association="BMSModel.Store.FK_Bier_inherits_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Bier" EntitySet="Products_Bier" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bierkroegen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OpdienerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dagen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TS" Type="datetime" Nullable="false" />
+    <Property Name="BierkroegId" Type="int" Nullable="false" />
+    <Property Name="OpdienerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Opdieners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TS" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bestellings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tafel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Totaal" Type="decimal" Nullable="false" />
+    <Property Name="IsBezorcht" Type="bit" Nullable="false" />
+    <Property Name="IsBezorchtTS" Type="datetime" Nullable="false" />
+    <Property Name="IsKlaarKeuken" Type="bit" Nullable="false" />
+    <Property Name="IsKlaarKeukenTS" Type="datetime" Nullable="false" />
+    <Property Name="IsPrinted" Type="bit" Nullable="false" />
+    <Property Name="OpdienerId" Type="int" Nullable="false" />
+    <Property Name="DagId" Type="int" Nullable="false" />
+    <Property Name="TS" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BestellingProtucts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Aantal" Type="smallint" Nullable="false" />
+    <Property Name="Totaal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BestellingId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Isbier" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BierTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BierGistings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gisting" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brouwerijs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Locatie" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prijs" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="InVoorraad" Type="bit" Nullable="false" />
+    <Property Name="TS" Type="int" Nullable="true" />
+    <Property Name="IMG" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ProductCategorieId" Type="int" Nullable="false" />
+    <Property Name="BestellingProtuctId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products_Bier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Alcohol" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Inhoud" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Aantal" Type="int" Nullable="false" />
+    <Property Name="BierTypeId" Type="int" Nullable="false" />
+    <Property Name="BierGistingId" Type="int" Nullable="false" />
+    <Property Name="BrouwerijId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductBierkroeg">
+    <Key>
+      <PropertyRef Name="Producten_Id" />
+      <PropertyRef Name="Bierkroegen_Id" />
+    </Key>
+    <Property Name="Producten_Id" Type="int" Nullable="false" />
+    <Property Name="Bierkroegen_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="BierkroegDag">
+    <End Role="Bierkroeg" Type="BMSModel.Store.Bierkroegen" Multiplicity="1" />
+    <End Role="Dag" Type="BMSModel.Store.Dagen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bierkroeg">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Dag">
+        <PropertyRef Name="BierkroegId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OpdienerDag">
+    <End Role="Opdiener" Type="BMSModel.Store.Opdieners" Multiplicity="1" />
+    <End Role="Dag" Type="BMSModel.Store.Dagen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opdiener">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Dag">
+        <PropertyRef Name="OpdienerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OpdienerBestelling">
+    <End Role="Opdiener" Type="BMSModel.Store.Opdieners" Multiplicity="1" />
+    <End Role="Bestelling" Type="BMSModel.Store.Bestellings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opdiener">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bestelling">
+        <PropertyRef Name="OpdienerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DagBestelling">
+    <End Role="Dag" Type="BMSModel.Store.Dagen" Multiplicity="1" />
+    <End Role="Bestelling" Type="BMSModel.Store.Bestellings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bestelling">
+        <PropertyRef Name="DagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BestellingBestellingPrutuct">
+    <End Role="Bestelling" Type="BMSModel.Store.Bestellings" Multiplicity="1" />
+    <End Role="BestellingPrutuct" Type="BMSModel.Store.BestellingProtucts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bestelling">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BestellingPrutuct">
+        <PropertyRef Name="BestellingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BierTypeBier">
+    <End Role="BierType" Type="BMSModel.Store.BierTypes" Multiplicity="1" />
+    <End Role="Bier" Type="BMSModel.Store.Products_Bier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BierType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bier">
+        <PropertyRef Name="BierTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BierGistingBier">
+    <End Role="BierGisting" Type="BMSModel.Store.BierGistings" Multiplicity="1" />
+    <End Role="Bier" Type="BMSModel.Store.Products_Bier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BierGisting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bier">
+        <PropertyRef Name="BierGistingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BrouwerijBier">
+    <End Role="Brouwerij" Type="BMSModel.Store.Brouwerijs" Multiplicity="1" />
+    <End Role="Bier" Type="BMSModel.Store.Products_Bier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brouwerij">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bier">
+        <PropertyRef Name="BrouwerijId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductCategorieProduct">
+    <End Role="ProductCategorie" Type="BMSModel.Store.ProductCategories" Multiplicity="1" />
+    <End Role="Product" Type="BMSModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategorie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductCategorieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BestellingPrutuctProduct">
+    <End Role="BestellingPrutuct" Type="BMSModel.Store.BestellingProtucts" Multiplicity="1" />
+    <End Role="Product" Type="BMSModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BestellingPrutuct">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BestellingProtuctId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBierkroeg_Product">
+    <End Role="Product" Type="BMSModel.Store.Products" Multiplicity="1" />
+    <End Role="ProductBierkroeg" Type="BMSModel.Store.ProductBierkroeg" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductBierkroeg">
+        <PropertyRef Name="Producten_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBierkroeg_Bierkroeg">
+    <End Role="ProductBierkroeg" Type="BMSModel.Store.ProductBierkroeg" Multiplicity="*" />
+    <End Role="Bierkroeg" Type="BMSModel.Store.Bierkroegen" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Bierkroeg">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductBierkroeg">
+        <PropertyRef Name="Bierkroegen_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bier_inherits_Product">
+    <End Role="Product" Type="BMSModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bier" Type="BMSModel.Store.Products_Bier" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bier">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BMSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="BMSModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bierkroegen" EntityType="BMSModel.Bierkroeg" />
+          <EntitySet Name="Dagen" EntityType="BMSModel.Dag" />
+          <AssociationSet Name="BierkroegDag" Association="BMSModel.BierkroegDag">
+            <End Role="Bierkroeg" EntitySet="Bierkroegen" />
+            <End Role="Dag" EntitySet="Dagen" />
+          </AssociationSet>
+          <EntitySet Name="Opdieners" EntityType="BMSModel.Opdiener" />
+          <AssociationSet Name="OpdienerDag" Association="BMSModel.OpdienerDag">
+            <End Role="Opdiener" EntitySet="Opdieners" />
+            <End Role="Dag" EntitySet="Dagen" />
+          </AssociationSet>
+          <EntitySet Name="Bestellings" EntityType="BMSModel.Bestelling" />
+          <AssociationSet Name="OpdienerBestelling" Association="BMSModel.OpdienerBestelling">
+            <End Role="Opdiener" EntitySet="Opdieners" />
+            <End Role="Bestelling" EntitySet="Bestellings" />
+          </AssociationSet>
+          <AssociationSet Name="DagBestelling" Association="BMSModel.DagBestelling">
+            <End Role="Dag" EntitySet="Dagen" />
+            <End Role="Bestelling" EntitySet="Bestellings" />
+          </AssociationSet>
+          <EntitySet Name="BestellingProtucts" EntityType="BMSModel.BestellingProtuct" />
+          <AssociationSet Name="BestellingBestellingPrutuct" Association="BMSModel.BestellingBestellingPrutuct">
+            <End Role="Bestelling" EntitySet="Bestellings" />
+            <End Role="BestellingPrutuct" EntitySet="BestellingProtucts" />
+          </AssociationSet>
+          <EntitySet Name="ProductCategories" EntityType="BMSModel.ProductCategorie" />
+          <EntitySet Name="BierTypes" EntityType="BMSModel.BierType" />
+          <EntitySet Name="BierGistings" EntityType="BMSModel.BierGisting" />
+          <EntitySet Name="Brouwerijs" EntityType="BMSModel.Brouwerij" />
+          <AssociationSet Name="BierTypeBier" Association="BMSModel.BierTypeBier">
+            <End Role="BierType" EntitySet="BierTypes" />
+            <End Role="Bier" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="BierGistingBier" Association="BMSModel.BierGistingBier">
+            <End Role="BierGisting" EntitySet="BierGistings" />
+            <End Role="Bier" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="BrouwerijBier" Association="BMSModel.BrouwerijBier">
+            <End Role="Brouwerij" EntitySet="Brouwerijs" />
+            <End Role="Bier" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="BMSModel.Product" />
+          <AssociationSet Name="ProductCategorieProduct" Association="BMSModel.ProductCategorieProduct">
+            <End Role="ProductCategorie" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="BestellingPrutuctProduct" Association="BMSModel.BestellingPrutuctProduct">
+            <End Role="BestellingPrutuct" EntitySet="BestellingProtucts" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="ProductBierkroeg" Association="BMSModel.ProductBierkroeg">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Bierkroeg" EntitySet="Bierkroegen" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bierkroeg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <NavigationProperty Name="Dagen" Relationship="BMSModel.BierkroegDag" FromRole="Bierkroeg" ToRole="Dag" />
+          <Property Name="OpdienerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producten" Relationship="BMSModel.ProductBierkroeg" FromRole="Bierkroeg" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Dag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="TS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Bierkroeg" Relationship="BMSModel.BierkroegDag" FromRole="Dag" ToRole="Bierkroeg" />
+          <Property Name="BierkroegId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Opdiener" Relationship="BMSModel.OpdienerDag" FromRole="Dag" ToRole="Opdiener" />
+          <Property Name="OpdienerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bestellingen" Relationship="BMSModel.DagBestelling" FromRole="Dag" ToRole="Bestelling" />
+        </EntityType>
+        <Association Name="BierkroegDag">
+          <End Type="BMSModel.Bierkroeg" Role="Bierkroeg" Multiplicity="1" />
+          <End Type="BMSModel.Dag" Role="Dag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bierkroeg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dag">
+              <PropertyRef Name="BierkroegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Opdiener">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="TS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Dagen" Relationship="BMSModel.OpdienerDag" FromRole="Opdiener" ToRole="Dag" />
+          <NavigationProperty Name="Bestellingen" Relationship="BMSModel.OpdienerBestelling" FromRole="Opdiener" ToRole="Bestelling" />
+        </EntityType>
+        <Association Name="OpdienerDag">
+          <End Type="BMSModel.Opdiener" Role="Opdiener" Multiplicity="1" />
+          <End Type="BMSModel.Dag" Role="Dag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opdiener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dag">
+              <PropertyRef Name="OpdienerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bestelling">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tafel" Type="String" Nullable="false" />
+          <Property Name="Totaal" Type="Decimal" Nullable="false" />
+          <Property Name="IsBezorcht" Type="Boolean" Nullable="false" />
+          <Property Name="IsBezorchtTS" Type="DateTime" Nullable="false" />
+          <Property Name="IsKlaarKeuken" Type="Boolean" Nullable="false" />
+          <Property Name="IsKlaarKeukenTS" Type="DateTime" Nullable="false" />
+          <Property Name="IsPrinted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Opdiener" Relationship="BMSModel.OpdienerBestelling" FromRole="Bestelling" ToRole="Opdiener" />
+          <Property Name="OpdienerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dag" Relationship="BMSModel.DagBestelling" FromRole="Bestelling" ToRole="Dag" />
+          <Property Name="DagId" Type="Int32" Nullable="false" />
+          <Property Name="TS" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="BestellingPrutucten" Relationship="BMSModel.BestellingBestellingPrutuct" FromRole="Bestelling" ToRole="BestellingPrutuct" />
+        </EntityType>
+        <Association Name="OpdienerBestelling">
+          <End Type="BMSModel.Opdiener" Role="Opdiener" Multiplicity="1" />
+          <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opdiener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bestelling">
+              <PropertyRef Name="OpdienerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DagBestelling">
+          <End Type="BMSModel.Dag" Role="Dag" Multiplicity="1" />
+          <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bestelling">
+              <PropertyRef Name="DagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BestellingProtuct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aantal" Type="Int16" Nullable="false" />
+          <Property Name="Totaal" Type="String" Nullable="false" />
+          <NavigationProperty Name="Bestelling" Relationship="BMSModel.BestellingBestellingPrutuct" FromRole="BestellingPrutuct" ToRole="Bestelling" />
+          <Property Name="BestellingId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producten" Relationship="BMSModel.BestellingPrutuctProduct" FromRole="BestellingPrutuct" ToRole="Product" />
+        </EntityType>
+        <Association Name="BestellingBestellingPrutuct">
+          <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="1" />
+          <End Type="BMSModel.BestellingProtuct" Role="BestellingPrutuct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bestelling">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BestellingPrutuct">
+              <PropertyRef Name="BestellingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductCategorie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Isbier" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Producten" Relationship="BMSModel.ProductCategorieProduct" FromRole="ProductCategorie" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="BierType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <NavigationProperty Name="Bieren" Relationship="BMSModel.BierTypeBier" FromRole="BierType" ToRole="Bier" />
+        </EntityType>
+        <EntityType Name="BierGisting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gisting" Type="String" Nullable="false" />
+          <NavigationProperty Name="Bieren" Relationship="BMSModel.BierGistingBier" FromRole="BierGisting" ToRole="Bier" />
+        </EntityType>
+        <EntityType Name="Brouwerij">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Locatie" Type="String" Nullable="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="true" />
+          <NavigationProperty Name="Bieren" Relationship="BMSModel.BrouwerijBier" FromRole="Brouwerij" ToRole="Bier" />
+        </EntityType>
+        <EntityType Name="Bier" BaseType="BMSModel.Product">
+          <Property Name="Alcohol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Inhoud" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Aantal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BierType" Relationship="BMSModel.BierTypeBier" FromRole="Bier" ToRole="BierType" />
+          <Property Name="BierTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BierGisting" Relationship="BMSModel.BierGistingBier" FromRole="Bier" ToRole="BierGisting" />
+          <Property Name="BierGistingId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brouwerij" Relationship="BMSModel.BrouwerijBier" FromRole="Bier" ToRole="Brouwerij" />
+          <Property Name="BrouwerijId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="BierTypeBier">
+          <End Type="BMSModel.BierType" Role="BierType" Multiplicity="1" />
+          <End Type="BMSModel.Bier" Role="Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BierType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bier">
+              <PropertyRef Name="BierTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BierGistingBier">
+          <End Type="BMSModel.BierGisting" Role="BierGisting" Multiplicity="1" />
+          <End Type="BMSModel.Bier" Role="Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BierGisting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bier">
+              <PropertyRef Name="BierGistingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BrouwerijBier">
+          <End Type="BMSModel.Brouwerij" Role="Brouwerij" Multiplicity="1" />
+          <End Type="BMSModel.Bier" Role="Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brouwerij">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bier">
+              <PropertyRef Name="BrouwerijId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductNaam" Type="String" Nullable="false" />
+          <Property Name="Prijs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Beschrijving" Type="String" Nullable="true" />
+          <Property Name="InVoorraad" Type="Boolean" Nullable="false" />
+          <Property Name="TS" Type="Int32" Nullable="true" />
+          <Property Name="IMG" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="ProductCategorie" Relationship="BMSModel.ProductCategorieProduct" FromRole="Product" ToRole="ProductCategorie" />
+          <Property Name="ProductCategorieId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BestellingProtuct" Relationship="BMSModel.BestellingPrutuctProduct" FromRole="Product" ToRole="BestellingPrutuct" />
+          <Property Name="BestellingProtuctId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bierkroegen" Relationship="BMSModel.ProductBierkroeg" FromRole="Product" ToRole="Bierkroeg" />
+        </EntityType>
+        <Association Name="ProductCategorieProduct">
+          <End Type="BMSModel.ProductCategorie" Role="ProductCategorie" Multiplicity="1" />
+          <End Type="BMSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategorie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProductCategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BestellingPrutuctProduct">
+          <End Type="BMSModel.BestellingProtuct" Role="BestellingPrutuct" Multiplicity="1" />
+          <End Type="BMSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BestellingPrutuct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BestellingProtuctId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductBierkroeg">
+          <End Type="BMSModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="BMSModel.Bierkroeg" Role="Bierkroeg" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BMSModelStoreContainer" CdmEntityContainer="BMSModelContainer">
+    <EntitySetMapping Name="Bierkroegen">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Bierkroeg)">
+        <MappingFragment StoreEntitySet="Bierkroegen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dagen">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Dag)">
+        <MappingFragment StoreEntitySet="Dagen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="TS" ColumnName="TS" />
+          <ScalarProperty Name="BierkroegId" ColumnName="BierkroegId" />
+          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Opdieners">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Opdiener)">
+        <MappingFragment StoreEntitySet="Opdieners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="TS" ColumnName="TS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bestellings">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Bestelling)">
+        <MappingFragment StoreEntitySet="Bestellings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tafel" ColumnName="Tafel" />
+          <ScalarProperty Name="Totaal" ColumnName="Totaal" />
+          <ScalarProperty Name="IsBezorcht" ColumnName="IsBezorcht" />
+          <ScalarProperty Name="IsBezorchtTS" ColumnName="IsBezorchtTS" />
+          <ScalarProperty Name="IsKlaarKeuken" ColumnName="IsKlaarKeuken" />
+          <ScalarProperty Name="IsKlaarKeukenTS" ColumnName="IsKlaarKeukenTS" />
+          <ScalarProperty Name="IsPrinted" ColumnName="IsPrinted" />
+          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
+          <ScalarProperty Name="DagId" ColumnName="DagId" />
+          <ScalarProperty Name="TS" ColumnName="TS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BestellingProtucts">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.BestellingProtuct)">
+        <MappingFragment StoreEntitySet="BestellingProtucts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Aantal" ColumnName="Aantal" />
+          <ScalarProperty Name="Totaal" ColumnName="Totaal" />
+          <ScalarProperty Name="BestellingId" ColumnName="BestellingId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.ProductCategorie)">
+        <MappingFragment StoreEntitySet="ProductCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Isbier" ColumnName="Isbier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BierTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.BierType)">
+        <MappingFragment StoreEntitySet="BierTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BierGistings">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.BierGisting)">
+        <MappingFragment StoreEntitySet="BierGistings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Gisting" ColumnName="Gisting" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brouwerijs">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Brouwerij)">
+        <MappingFragment StoreEntitySet="Brouwerijs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Locatie" ColumnName="Locatie" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductNaam" ColumnName="ProductNaam" />
+          <ScalarProperty Name="Prijs" ColumnName="Prijs" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="InVoorraad" ColumnName="InVoorraad" />
+          <ScalarProperty Name="TS" ColumnName="TS" />
+          <ScalarProperty Name="IMG" ColumnName="IMG" />
+          <ScalarProperty Name="ProductCategorieId" ColumnName="ProductCategorieId" />
+          <ScalarProperty Name="BestellingProtuctId" ColumnName="BestellingProtuctId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(BMSModel.Bier)">
+        <MappingFragment StoreEntitySet="Products_Bier">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
+          <ScalarProperty Name="Inhoud" ColumnName="Inhoud" />
+          <ScalarProperty Name="Aantal" ColumnName="Aantal" />
+          <ScalarProperty Name="BierTypeId" ColumnName="BierTypeId" />
+          <ScalarProperty Name="BierGistingId" ColumnName="BierGistingId" />
+          <ScalarProperty Name="BrouwerijId" ColumnName="BrouwerijId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductBierkroeg" TypeName="BMSModel.ProductBierkroeg" StoreEntitySet="ProductBierkroeg">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Producten_Id" />
+      </EndProperty>
+      <EndProperty Name="Bierkroeg">
+        <ScalarProperty Name="Id" ColumnName="Bierkroegen_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

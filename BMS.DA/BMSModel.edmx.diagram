@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9920c5ea7594e71b1fb7c6347827bd9" Name="Diagram1" ZoomLevel="101" >
+        <EntityTypeShape EntityType="BMSModel.Bierkroeg" Width="1.5" PointX="1.125" PointY="2.75" />
+        <EntityTypeShape EntityType="BMSModel.Dag" Width="1.5" PointX="3.375" PointY="3.75" />
+        <AssociationConnector Association="BMSModel.BierkroegDag" />
+        <EntityTypeShape EntityType="BMSModel.Opdiener" Width="1.5" PointX="1.125" PointY="5" />
+        <AssociationConnector Association="BMSModel.OpdienerDag" />
+        <EntityTypeShape EntityType="BMSModel.Bestelling" Width="1.75" PointX="5.625" PointY="3.75" />
+        <AssociationConnector Association="BMSModel.OpdienerBestelling" />
+        <AssociationConnector Association="BMSModel.DagBestelling" />
+        <EntityTypeShape EntityType="BMSModel.BestellingProtuct" Width="1.5" PointX="8.125" PointY="3.75" />
+        <AssociationConnector Association="BMSModel.BestellingBestellingPrutuct" />
+        <EntityTypeShape EntityType="BMSModel.ProductCategorie" Width="1.75" PointX="10.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BMSModel.BierType" Width="1.5" PointX="15.375" PointY="2.75" />
+        <EntityTypeShape EntityType="BMSModel.BierGisting" Width="1.5" PointX="15.375" PointY="4.875" />
+        <EntityTypeShape EntityType="BMSModel.Brouwerij" Width="1.5" PointX="13" PointY="6.25" />
+        <EntityTypeShape EntityType="BMSModel.Bier" Width="1.5" PointX="13" PointY="2.75" />
+        <AssociationConnector Association="BMSModel.BierTypeBier" />
+        <AssociationConnector Association="BMSModel.BierGistingBier" />
+        <AssociationConnector Association="BMSModel.BrouwerijBier" />
+        <EntityTypeShape EntityType="BMSModel.Product" Width="1.75" PointX="10.375" PointY="2.75" />
+        <InheritanceConnector EntityType="BMSModel.Bier" />
+        <AssociationConnector Association="BMSModel.ProductCategorieProduct" />
+        <AssociationConnector Association="BMSModel.BestellingPrutuctProduct" />
+        <AssociationConnector Association="BMSModel.ProductBierkroeg" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
