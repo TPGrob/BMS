@@ -77,7 +77,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="OpdienerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Dagen">
     <Key>
@@ -413,7 +412,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Naam" Type="String" Nullable="false" />
           <NavigationProperty Name="Dagen" Relationship="BMSModel.BierkroegDag" FromRole="Bierkroeg" ToRole="Dag" />
-          <Property Name="OpdienerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Producten" Relationship="BMSModel.ProductBierkroeg" FromRole="Bierkroeg" ToRole="Product" />
         </EntityType>
         <EntityType Name="Dag">
@@ -668,7 +666,6 @@
         <MappingFragment StoreEntitySet="Bierkroegen">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

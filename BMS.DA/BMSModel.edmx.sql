@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2019 18:03:32
+-- Date Created: 06/02/2019 18:14:50
 -- Generated from EDMX file: C:\Projects\BMS\BMS.DA\BMSModel.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,86 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_BierkroegDag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_BierkroegDag];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpdienerDag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_OpdienerDag];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpdienerBestelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bestellings] DROP CONSTRAINT [FK_OpdienerBestelling];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DagBestelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bestellings] DROP CONSTRAINT [FK_DagBestelling];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BestellingBestellingPrutuct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BestellingProtucts] DROP CONSTRAINT [FK_BestellingBestellingPrutuct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BierTypeBier]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BierTypeBier];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BierGistingBier]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BierGistingBier];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BrouwerijBier]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_BrouwerijBier];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductCategorieProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_ProductCategorieProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BestellingPrutuctProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_BestellingPrutuctProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductBierkroeg_Product]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductBierkroeg] DROP CONSTRAINT [FK_ProductBierkroeg_Product];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductBierkroeg_Bierkroeg]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProductBierkroeg] DROP CONSTRAINT [FK_ProductBierkroeg_Bierkroeg];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Bier_inherits_Product]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products_Bier] DROP CONSTRAINT [FK_Bier_inherits_Product];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Bierkroegen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Bierkroegen];
+GO
+IF OBJECT_ID(N'[dbo].[Dagen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Dagen];
+GO
+IF OBJECT_ID(N'[dbo].[Opdieners]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Opdieners];
+GO
+IF OBJECT_ID(N'[dbo].[Bestellings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Bestellings];
+GO
+IF OBJECT_ID(N'[dbo].[BestellingProtucts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BestellingProtucts];
+GO
+IF OBJECT_ID(N'[dbo].[ProductCategories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductCategories];
+GO
+IF OBJECT_ID(N'[dbo].[BierTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BierTypes];
+GO
+IF OBJECT_ID(N'[dbo].[BierGistings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BierGistings];
+GO
+IF OBJECT_ID(N'[dbo].[Brouwerijs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Brouwerijs];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[Products_Bier]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products_Bier];
+GO
+IF OBJECT_ID(N'[dbo].[ProductBierkroeg]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProductBierkroeg];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -30,8 +105,7 @@ GO
 -- Creating table 'Bierkroegen'
 CREATE TABLE [dbo].[Bierkroegen] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Naam] nvarchar(max)  NOT NULL,
-    [OpdienerId] int  NOT NULL
+    [Naam] nvarchar(max)  NOT NULL
 );
 GO
 
