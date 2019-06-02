@@ -9,7 +9,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="33" />
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -18,8 +18,9 @@
             <ComboBox x:Name="cbBierkroeg" DisplayMemberPath="Naam" SelectedValuePath="Id" Width="100"  Margin="0,5,0,5" SelectionChanged="cbBierkroeg_SelectionChanged"/>
             <Button Margin="5" Padding="5,0,5,0" Content="Producten" Width="70" Click="ProductenClick"/>
         </WrapPanel>
-        <Button Grid.Row="1" Margin="5" Padding="5,0,5,0" Width="20" HorizontalAlignment="Left" Content="+" Click="NieuweDagClick"/>
-        <Button Grid.Row="1" Margin="30,5,0,5" Padding="5,0,5,0" Width="50" HorizontalAlignment="Left" Content="Totaal" Click="TotaalDagenClick"/>
-        <WrapPanel x:Name="wpDagen" Grid.Row="1" FlowDirection="LeftToRight" Margin="85,0,0,0"  />
+        <Grid x:Name="gDagen" Background="#FF777777" Grid.Row="1" IsEnabled="false">
+            <Button Margin="5" Padding="5,0,5,0" Width="20" HorizontalAlignment="Left" Content="+" Click="NieuweDagClick"/>
+            <WrapPanel x:Name="wpDagen" FlowDirection="LeftToRight" Margin="39,8,0,2"/>
+        </Grid>
     </Grid>
 </UserControl>

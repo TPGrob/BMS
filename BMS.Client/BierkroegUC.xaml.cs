@@ -25,6 +25,7 @@ namespace BMS.Client
 
         BMSModelContainer _db;
         Bierkroeg _b;
+        List<Bestelling> _bestellingen;
 
         public BierkroegUC(BMSModelContainer db)
         {
@@ -43,8 +44,24 @@ namespace BMS.Client
                 cbBierkroeg.SelectedItem = _db.Bierkroegen.ToList().Last();
             }
             cbBierkroeg.UpdateLayout();
-        }
 
+            if (_b != null) {
+                gDagen.IsEnabled = true;
+                foreach(Dag d in _b.Dagen)
+                {
+                    CheckBox cb = new CheckBox();
+                    cb.Tag = d;
+                    cb.Content = d.Naam;
+                    cb.IsChecked = true;
+                    cb.Checked += checkedChanged;
+                    cb.Unchecked += checkedChanged;
+                    cb.Margin = new Thickness(0, 0, 10, 0);
+                    wpDagen.Children.Add(cb);
+                }
+            }
+            else { gDagen.IsEnabled = false; }
+        }
+       
         private void cbBierkroeg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _b = (Bierkroeg)cbBierkroeg.SelectedItem;
@@ -71,8 +88,16 @@ namespace BMS.Client
             GetData();
         }
 
-        private void TotaalDagenClick(object sender, RoutedEventArgs e)
+        private void checkedChanged( object sender, RoutedEventArgs e)
         {
+            _bestellingen = new List<Bestelling>();
+            foreach (CheckBox cb in wpDagen.Children) {
+                if (cb.IsChecked == true)
+                {
+                    Dag d = (Dag)cb.Tag;
+                    _bestellingen.AddRange(d.Bestellingen);
+                }
+            }
         }
     }
 }

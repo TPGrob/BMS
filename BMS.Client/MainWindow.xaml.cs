@@ -28,11 +28,13 @@ namespace BMS.Client
         public MainWindow()
         {
             InitializeComponent();
+          
         }
 
         private void ContentRenderd(object sender, EventArgs e)
         {
             _db = new BMSModelContainer();
+            changeUI();
         }
 
 
@@ -41,8 +43,8 @@ namespace BMS.Client
             g_Placeholder.Children.Clear();
             switch (page)
             {
-                case "Dag":
-                    //_uc = new ProductenUC(_db);
+                case "Producten":
+                    _uc = new ProductenUC(_db);
                break;
                 default:
                      _uc = new BierkroegUC(_db);
@@ -60,12 +62,13 @@ namespace BMS.Client
 
         private void Opdieners_Click(object sender, RoutedEventArgs e)
         {
-
+            OpdienersWindow ow = new OpdienersWindow(_db);
+            ow.Show();
         }
 
         private void Producten_Click(object sender, RoutedEventArgs e)
         {
-
+            changeUI("Producten");
         }
     }
 }
