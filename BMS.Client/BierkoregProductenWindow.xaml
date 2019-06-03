@@ -1,0 +1,34 @@
+﻿<Window x:Class="BMS.Client.BierkoregProductenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BMS.Client"
+        mc:Ignorable="d"
+        Title="" Height="700" Width="700" MinHeight="600"  MinWidth="600" Background="#ff444444" Unloaded="Unload">
+    <Grid>
+       <ListView x:Name="lv_producten" Grid.Column="0" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding ProductNaam}" Width="200"/>
+                    <GridViewColumn Header="Prijs" DisplayMemberBinding="{Binding Prijs, StringFormat={}{0:C}}" Width="100"/>
+                    <GridViewColumn Header="categorie" DisplayMemberBinding="{Binding Path=ProductCategorie.Naam}" Width="200"/>
+                    <GridViewColumn Header="In vooraad">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding InVoorraad}" IsEnabled="False" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

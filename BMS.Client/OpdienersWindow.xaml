@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMS.Client"
         mc:Ignorable="d"
-        Title="Opdieners" Height="500" Width="600" Background="#FF444444">
+        Title="Opdieners" Height="500" Width="600" Background="#FF444444" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -19,6 +19,7 @@ namespace BMS.DA
         {
             this.Producten = new HashSet<Product>();
             this.Dagen = new HashSet<Dag>();
+            this.Opdieners = new HashSet<Opdiener>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace BMS.DA
         public virtual ICollection<Product> Producten { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dag> Dagen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Opdiener> Opdieners { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace BMS.DA
         public bool IsKlaarKeuken { get; set; }
         public Nullable<System.DateTime> IsKlaarKeukenTS { get; set; }
         public bool IsPrinted { get; set; }
-        public Nullable<System.DateTime> TS { get; set; }
+        public string TS { get; set; }
         public int OpdienerId { get; set; }
         public int DagId { get; set; }
     

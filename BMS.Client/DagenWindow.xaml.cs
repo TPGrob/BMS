@@ -28,6 +28,7 @@ namespace BMS.Client
             _db = db;
             _b = b;
             InitializeComponent();
+            this.Title = "Nieuwe dag : " + _b.Naam;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,7 @@ namespace BMS.Client
             {
                 Dag d = new Dag();
                 d.Naam = txtBierkroegNAam.Text;
-                d.TS = DateTime.Now;
+                d.TS = DateTime.Now.ToString();
                 d.Bierkroeg = _b;
 
                 _db.Dagen.Add(d);

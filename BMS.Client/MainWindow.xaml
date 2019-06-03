@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMS.Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ContentRendered="ContentRenderd" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="MainWindow" Width="900"  Height="800" MinWidth="900" MinHeight="800" ContentRendered="ContentRenderd" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid  Background="#FF444444">
         <Menu Height="23" VerticalAlignment="Top">
             <MenuItem Header="Bierkroeg" Click="Bierkroeg_Click"/>
-            <MenuItem Header="Opdieners" Click="Opdieners_Click"  />
             <MenuItem Header="Producten" Click="Producten_Click"  />
-            <!-- <MenuItem Header="Brouwerijen" Click="Brouwerij_Click" />-->
+            <MenuItem Header="Brouwerijen" Click="Brouwerij_Click" />
         </Menu>
-        <Grid x:Name="g_Placeholder" Margin="5,28,5,5">
+        <Grid x:Name="g_Placeholder" Margin="0,23,0,0">
             
         </Grid>
     </Grid>

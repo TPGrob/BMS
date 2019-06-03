@@ -5,22 +5,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BMS.Client"
              mc:Ignorable="d" 
-             d:DesignHeight="300" Width="480">
+             d:DesignHeight="500" Width="550">
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="33" />
-            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" FlowDirection="LeftToRight"  >
+        <WrapPanel Grid.Row="0" FlowDirection="LeftToRight" Background="#FFAAAAAA">
+            <Label Content="Bierkroeg" Margin="2"/>
             <Button Margin="5" Padding="5,0,5,0" Content="+" Width="20" Click="BierkroegNieuw"/>
             <ComboBox x:Name="cbBierkroeg" DisplayMemberPath="Naam" SelectedValuePath="Id" Width="100"  Margin="0,5,0,5" SelectionChanged="cbBierkroeg_SelectionChanged"/>
-            <Button Margin="5" Padding="5,0,5,0" Content="Producten" Width="70" Click="ProductenClick"/>
+            <Label Content="|" Margin="2"/>
+            <WrapPanel x:Name="gDagen" IsEnabled="false" Width="auto">
+                <Button Margin="5" Padding="5,0,5,0" Content="Producten" Width="70" Click="ProductenClick"/>
+                <Button Margin="5" Padding="5,0,5,0" Content="Opdieners" Width="70" Click="opdienersClick"/>
+                <Label Content="Dagen" Margin="2"/>
+                <Button Margin="5" Padding="5,0,5,0" Width="20" HorizontalAlignment="Left" Content="+" Click="NieuweDagClick"/>
+                <WrapPanel x:Name="wpDagen" FlowDirection="LeftToRight" Margin="39,8,0,2"/>
+            </WrapPanel>
         </WrapPanel>
-        <Grid x:Name="gDagen" Background="#FF777777" Grid.Row="1" IsEnabled="false">
-            <Button Margin="5" Padding="5,0,5,0" Width="20" HorizontalAlignment="Left" Content="+" Click="NieuweDagClick"/>
-            <WrapPanel x:Name="wpDagen" FlowDirection="LeftToRight" Margin="39,8,0,2"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Background="#ff666666">
+                <Label  Content="Algemeen" Background="#FF222222" Height="35" VerticalAlignment="Top" Foreground="#FFBBBBBB" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"/>
+                <Label Content="Dagen :" Height="27" Margin="0,35,231,205" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblAantalDagen" Content="0" Height="27" Margin="119,35,0,205" VerticalAlignment="Top"/>
+                <Label Content="Opdieners :" Height="27" Margin="0,62,231,178" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblOpdieners" Content="0" Height="27" Margin="119,62,0,178" VerticalAlignment="Top"/>
+                <Label Content="Producten :" Height="27" Margin="0,89,231,151" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblProducten" Content="0" Height="27" Margin="119,89,0,151" VerticalAlignment="Top"/>
+                <Label Content="Bieren :" Height="27" Margin="0,116,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblBieren" Content="0" Height="27" Margin="119,116,0,0" VerticalAlignment="Top"/>
+                <Label  Content="Verkoop" Background="#FF222222" Height="35" VerticalAlignment="Top" Foreground="#FFBBBBBB" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Margin="0,148,0,0"/>
+                <Label Content="Bieren :" Height="27" Margin="0,210,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblBierenVerkoop" Content="0" Height="27" Margin="119,210,0,0" VerticalAlignment="Top"/>
+                <Label Content="Andere dranken :" Height="27" Margin="0,237,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblAndereVerkoop" Content="0" Height="27" Margin="119,237,0,0" VerticalAlignment="Top"/>
+                <Label Content="Keuken :" Height="27" Margin="0,264,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblKeukenVerkoop" Content="0" Height="27" Margin="119,264,0,0" VerticalAlignment="Top"/>
+                <Label Content="Omzet :" Height="27" Margin="0,291,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblOmzet" Content="0" Height="27" Margin="119,291,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="cbRefresh" Content="refresh" Margin="0,0,10,10" Checked="refreshStart" Unchecked="refreshStop" HorizontalAlignment="Right" Width="57" Height="15" VerticalAlignment="Bottom"/>
+                <Label Content="Bestellingen :" Height="27" Margin="0,183,231,0" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label x:Name="lblVerkopen" Content="0" Height="27" Margin="119,183,0,0" VerticalAlignment="Top"/>
+
+
+
+            </Grid>
         </Grid>
+
     </Grid>
 </UserControl>

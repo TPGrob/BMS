@@ -4,25 +4,71 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BMS.Client"
-             mc:Ignorable="d" Height="397.656" Width="646.094">
-    <Grid>
-        <TabControl x:Name="tabControl">
-            <TabItem Header="Producten">
-                <Grid Background="#FF666666">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
-                    <ListView x:Name="lvProducten" Grid.Column="0">
-                        
-                        
-                    </ListView>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Brouwerijen">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
+             mc:Ignorable="d" Height="600" Width="646.094">
 
+    <Grid Background="#FF444444">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lv_producten" Grid.Column="0" SelectionChanged="lv_productenSC" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler" Margin="0,31,0,0">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding ProductNaam}" Width="200"/>
+                    <GridViewColumn Header="Prijs" DisplayMemberBinding="{Binding Prijs, StringFormat={}{0:C}}" Width="100"/>
+                    <GridViewColumn Header="categorie" DisplayMemberBinding="{Binding Path=ProductCategorie.Naam}" Width="100"/>
+                    <GridViewColumn Header="In vooraad">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding InVoorraad}" IsEnabled="False" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <GroupBox Grid.Column="1" Header="Bewerk product" HorizontalAlignment="Left" Margin="5,45,0,0" VerticalAlignment="Top" Height="678" Width="345" Foreground="White" BorderBrush="White">
+            <Grid x:Name="g_Product">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Naam" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txt_Naam" HorizontalAlignment="Left" Height="23" Margin="90,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Path=ProductNaam, UpdateSourceTrigger=PropertyChanged}" TabIndex="200"/>
+                <Label Content="Categorie" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cb_categorie" DisplayMemberPath="Naam" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="90,40,0,0" VerticalAlignment="Top" Width="233" SelectedValue="{Binding Path=ProductCategorieId, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="cb_categorie_SelectionChanged" IsEnabled="False" TabIndex="210"/>
+                <Label Content="Beschrijving" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txt_Beschrijving" HorizontalAlignment="Left" Height="86" Margin="90,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Path=Beschrijving, UpdateSourceTrigger=PropertyChanged}" TabIndex="220"/>
+                <Label Content="Prijs" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <!--<TextBox x:Name="txt_Prijs" HorizontalAlignment="Left" Height="23" Margin="90,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Path=Prijs, UpdateSourceTrigger=PropertyChanged,  StringFormat='#.0', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" TabIndex="230"/>-->
+                <Button Width="233" Height="200" Click="btn_ImageClick" TabIndex="240" Margin="90,186,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <Image x:Name="imgEtiket" Source="{Binding Path=IMG}"  HorizontalAlignment="Left" Height="197" VerticalAlignment="Top" Width="230"  />
+                </Button>
+                <Button x:Name="btn_Opslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="90,0,0,10" VerticalAlignment="Bottom" Width="233" Height="45" Click="btn_Opslaan_Click" TabIndex="295"/>
+                <Label Content="Foto" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <Label Content="In Vooraad"  HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+
+                <Label Content="Alcohol" HorizontalAlignment="Left" Margin="10,441,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <!--<TextBox x:Name="txt_Alcohol" HorizontalAlignment="Left" Height="23" Margin="90,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Alcohol, UpdateSourceTrigger=PropertyChanged,  StringFormat='#.0'}" IsEnabled="False" TabIndex="250"/>-->
+                <Label Content="Brouwerij" HorizontalAlignment="Left" Margin="10,467,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cb_Brouwerij" DisplayMemberPath="Naam" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="90,471,0,0" VerticalAlignment="Top" Width="233" SelectedValue="{Binding BrouwerijId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" TabIndex="260"/>
+                <Label Content="Type" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cb_Type" DisplayMemberPath="Type" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="90,498,0,0" VerticalAlignment="Top" Width="233" SelectedValue="{Binding BierTypeId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" TabIndex="270"/>
+                <Label Content="Gisting" HorizontalAlignment="Left" Margin="10,521,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cb_Gisting" DisplayMemberPath="Gisting" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="90,525,0,0" VerticalAlignment="Top" Width="233" SelectedValue="{Binding BierGistingId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" TabIndex="280"/>
+                <Label Content="Inhoud" HorizontalAlignment="Left" Margin="10,548,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cb_Inhod"  HorizontalAlignment="Left" DisplayMemberPath="name" SelectedValuePath="value" Margin="90,552,0,0" VerticalAlignment="Top" Width="233" SelectedValue="{Binding Inhoud, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" TabIndex="290"/>
+                <CheckBox Content="" HorizontalAlignment="Left" Margin="90,395,0,0" VerticalAlignment="Top" IsChecked="{Binding InVoorraad}"/>
+                <TextBox Text="{Binding Path=Prijs, UpdateSourceTrigger=PropertyChanged,  StringFormat='#.0'}" x:Name="txt_Prijs" HorizontalAlignment="Left" TabIndex="230" Height="23" Margin="90,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" />
+                <TextBox x:Name="txt_Alcohol" HorizontalAlignment="Left" Height="23" Margin="90,443,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Alcohol, UpdateSourceTrigger=PropertyChanged,  StringFormat='#.0'}" IsEnabled="False" TabIndex="250"  />
+                <Label Content="Aantal" HorizontalAlignment="Left" Margin="10,413,0,0" VerticalAlignment="Top" Width="75" Foreground="White" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txt_aantal" HorizontalAlignment="Left" Height="23" Margin="90,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Text="{Binding Aantal, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" TabIndex="245"/>
+
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_productNieuw" Content="Nieuw product" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="btn_productNieuw_Click" TabIndex="296"/>
+        <Button x:Name="btn_bierNieuw" Content="Nieuw bier" Grid.Column="1" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Top" Width="170" Height="40" Click="btn_bierNieuw_Click" TabIndex="297"/>
+        <ComboBox x:Name="cb_filterCategorie" HorizontalAlignment="Left" Margin="109,5,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="cb_filterCategorie_SelectionChanged"/>
+        <Label Content="Filter categorieen" HorizontalAlignment="Left" Margin="2,2,0,0" VerticalAlignment="Top" Foreground="White"/>
     </Grid>
 </UserControl>

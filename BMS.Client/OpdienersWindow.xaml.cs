@@ -22,20 +22,24 @@ namespace BMS.Client
     {
 
         BMSModelContainer _db;
-        public OpdienersWindow(BMSModelContainer db)
+        Bierkroeg _b;
+        public OpdienersWindow(BMSModelContainer db, Bierkroeg b)
         {
             _db = db;
+            _b = b;
             InitializeComponent();
-
+            this.Title = "Opdierens : " + _b.Naam;
             getdata();
         }
         void getdata() {
-            lbOpdieners.ItemsSource = _db.Opdieneren.ToList();
+            lbOpdieners.ItemsSource = _db.Opdieneren.Where(o => o.BierkroegId == _b.Id).ToList();
         }
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             Opdiener o = new Opdiener();
             o.Naam = txtNaam.Text;
+            o.TS = DateTime.Now.ToString();
+            o.Bierkroeg = _b;
             _db.Opdieneren.Add(o);
             _db.SaveChanges();
             getdata();

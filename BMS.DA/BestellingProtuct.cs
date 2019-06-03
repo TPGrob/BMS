@@ -14,12 +14,6 @@ namespace BMS.DA
     
     public partial class BestellingProtuct
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BestellingProtuct()
-        {
-            this.Producten = new HashSet<Product>();
-        }
-    
         public int Id { get; set; }
         public short Aantal { get; set; }
         public string Totaal { get; set; }
@@ -27,7 +21,6 @@ namespace BMS.DA
         public int ProductId { get; set; }
     
         public virtual Bestelling Bestelling { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Producten { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

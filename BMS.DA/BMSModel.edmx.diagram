@@ -21,12 +21,13 @@
         <AssociationConnector Association="BMSModel.BrouwerijBier" />
         <EntityTypeShape EntityType="BMSModel.Product" Width="1.75" PointX="10.375" PointY="2.75" />
         <InheritanceConnector EntityType="BMSModel.Bier" />
-        <AssociationConnector Association="BMSModel.ProductCategorieProduct" />
-        <AssociationConnector Association="BMSModel.BestellingPrutuctProduct" />
         <AssociationConnector Association="BMSModel.ProductBierkroeg" />
         <AssociationConnector Association="BMSModel.BierkroegDag" />
         <AssociationConnector Association="BMSModel.OpdienerBestelling" />
         <AssociationConnector Association="BMSModel.DagBestelling" />
+        <AssociationConnector Association="BMSModel.ProductBestellingProtuct" />
+        <AssociationConnector Association="BMSModel.ProductProductCategorie" />
+        <AssociationConnector Association="BMSModel.BierkroegOpdiener" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

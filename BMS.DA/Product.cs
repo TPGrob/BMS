@@ -18,6 +18,7 @@ namespace BMS.DA
         public Product()
         {
             this.Bierkroegen = new HashSet<Bierkroeg>();
+            this.BestellingProtucten = new HashSet<BestellingProtuct>();
         }
     
         public int Id { get; set; }
@@ -27,11 +28,11 @@ namespace BMS.DA
         public bool InVoorraad { get; set; }
         public byte[] IMG { get; set; }
         public int ProductCategorieId { get; set; }
-        public int BestellingProtuctId { get; set; }
     
-        public virtual ProductCategorie ProductCategorie { get; set; }
-        public virtual BestellingProtuct BestellingProtuct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bierkroeg> Bierkroegen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BestellingProtuct> BestellingProtucten { get; set; }
+        public virtual ProductCategorie ProductCategorie { get; set; }
     }
 }

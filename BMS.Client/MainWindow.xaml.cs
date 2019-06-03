@@ -45,7 +45,10 @@ namespace BMS.Client
             {
                 case "Producten":
                     _uc = new ProductenUC(_db);
-               break;
+                break;
+                case "Brouwerij":
+                    _uc = new BrouwerijUC(_db);
+                break;
                 default:
                      _uc = new BierkroegUC(_db);
                 break;
@@ -59,16 +62,14 @@ namespace BMS.Client
         {
             changeUI();
         }
-
-        private void Opdieners_Click(object sender, RoutedEventArgs e)
-        {
-            OpdienersWindow ow = new OpdienersWindow(_db);
-            ow.Show();
-        }
-
         private void Producten_Click(object sender, RoutedEventArgs e)
         {
             changeUI("Producten");
+        }
+
+        private void Brouwerij_Click(object sender, RoutedEventArgs e)
+        {
+            changeUI("Brouwerij");
         }
     }
 }

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMS.Client"
         mc:Ignorable="d"
-          Title="Nieuwe Dag" Height="131.251" Width="262.5" Background="#FF444444" WindowStartupLocation="CenterScreen" >
+          Title="Nieuwe Dag" Height="111.748" Width="353.163" Background="#FF444444" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid>
         <Label Content="Naam" Foreground="White" Margin="10,10,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"/>
-        <TextBox x:Name="txtBierkroegNAam" HorizontalAlignment="Left" Height="23" Margin="65,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>
-        <Button x:Name="btnCancel" Content="Annuleer" HorizontalAlignment="Left" Margin="164,50,0,0" VerticalAlignment="Top" Width="66" Height="28" IsCancel="True" Click="btnCancel_Click" />
-        <Button x:Name="btnOk" Content="Ok" HorizontalAlignment="Left" Margin="93,50,0,0" VerticalAlignment="Top" Width="66" Height="28" IsDefault="True" Click="btnOk_Click"/>
+        <TextBox x:Name="txtBierkroegNAam" HorizontalAlignment="Left" Height="23" Margin="65,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
+        <Button x:Name="btnCancel" Content="Annuleer" HorizontalAlignment="Left" Margin="269,42,0,0" VerticalAlignment="Top" Width="66" Height="28" IsCancel="True" Click="btnCancel_Click" />
+        <Button x:Name="btnOk" Content="Ok" HorizontalAlignment="Left" Margin="198,42,0,0" VerticalAlignment="Top" Width="66" Height="28" IsDefault="True" Click="btnOk_Click"/>
 
     </Grid>
 </Window>

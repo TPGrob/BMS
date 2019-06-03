@@ -26,14 +26,20 @@ namespace BMS.Client
         BMSModelContainer _db;
         Bierkroeg _b;
         List<Bestelling> _bestellingen;
+        public System.Windows.Threading.DispatcherTimer dispatcherTimer ;
 
         public BierkroegUC(BMSModelContainer db)
         {
             _db = db;
             
             InitializeComponent();
-
+            
             GetData();
+            setStats();
+            setVerkoop();
+          
+           
+            
         }
 
         void GetData() {
@@ -45,9 +51,14 @@ namespace BMS.Client
             }
             cbBierkroeg.UpdateLayout();
 
-            if (_b != null) {
+          
+        }
+        void setData() {
+            if (_b != null)
+            {
                 gDagen.IsEnabled = true;
-                foreach(Dag d in _b.Dagen)
+                wpDagen.Children.Clear();
+                foreach (Dag d in _b.Dagen)
                 {
                     CheckBox cb = new CheckBox();
                     cb.Tag = d;
@@ -60,23 +71,97 @@ namespace BMS.Client
                 }
             }
             else { gDagen.IsEnabled = false; }
+            setStats();
         }
-       
+
+        void setStats()
+        {
+            lblOpdieners.Content = _b.Opdieners.Count().ToString();
+            lblAantalDagen.Content = _b.Dagen.Count.ToString();
+            lblBieren.Content = _b.Producten.Where(p => p.ProductCategorieId == 1).Count().ToString();
+            lblProducten.Content = _b.Producten.Count().ToString();
+        }
+
+        void setVerkoop()
+        {
+            Bierkroeg bk = _db.Bierkroegen.First(b => b.Id == _b.Id);
+            List<Dag> dagen = new List<Dag>();
+            List<Bestelling> bestellingen = new List<Bestelling>();
+            int aantalbestelingen = 0;
+            int bieren = 0;
+            int keuken = 0;
+            int andere = 0;
+            decimal totaal_verkocht = 0;
+
+            foreach (CheckBox cb in wpDagen.Children)
+            {
+                if (cb.IsChecked == true)
+                {
+                    dagen.Add((Dag)cb.Tag);
+                }
+            }
+
+
+            foreach (Dag d in bk.Dagen)
+            {
+                if (dagen.Contains(d))
+                {
+                    bestellingen.AddRange(d.Bestellingen);
+                }
+            }
+
+
+
+            foreach (Bestelling b in bestellingen)
+            {
+                foreach (BestellingProtuct p in b.BestellingPrutucten)
+                {
+                    if (p.Product.ProductCategorie.Id == 1)
+                    {
+                        bieren += p.Aantal;
+                    }
+                    if (p.Product.ProductCategorie.Id == 2)
+                    {
+                        andere += p.Aantal;
+                    }
+                    if (p.Product.ProductCategorie.Id == 3)
+                    {
+                        keuken += p.Aantal;
+                    }
+
+                }
+                totaal_verkocht += b.Totaal;
+                aantalbestelingen += 1;
+            }
+
+            lblVerkopen.Content = aantalbestelingen.ToString();
+            lblBierenVerkoop.Content = bieren.ToString();
+            lblAndereVerkoop.Content = andere.ToString();
+            lblKeukenVerkoop.Content = keuken.ToString();
+            lblOmzet.Content = "€ " + totaal_verkocht.ToString();
+        }
+
         private void cbBierkroeg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _b = (Bierkroeg)cbBierkroeg.SelectedItem;
+            setData();
+
         }
 
         private void BierkroegNieuw(object sender, RoutedEventArgs e)
         {
             BierkroegWindow bw = new BierkroegWindow(_db);
             bw.ShowDialog();
-
+            _
             GetData();
+
         }
 
         private void ProductenClick(object sender, RoutedEventArgs e)
         {
+            BierkoregProductenWindow bpw = new BierkoregProductenWindow(_db, _b);
+            bpw.ShowDialog();
+            setStats();
 
         }
 
@@ -85,7 +170,7 @@ namespace BMS.Client
             DagenWindow bw = new DagenWindow(_db,_b);
             bw.ShowDialog();
 
-            GetData();
+            setData();
         }
 
         private void checkedChanged( object sender, RoutedEventArgs e)
@@ -98,6 +183,32 @@ namespace BMS.Client
                     _bestellingen.AddRange(d.Bestellingen);
                 }
             }
+        }
+
+        private void opdienersClick(object sender, RoutedEventArgs e)
+        {
+            OpdienersWindow ow = new OpdienersWindow(_db, _b);
+            ow.ShowDialog();
+            GetData();
+            setStats();
+        }
+
+        private void refreshStart(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            dispatcherTimer.Start();
+        }
+
+        private void refreshStop(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Stop();
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+
+            setVerkoop();
         }
     }
 }

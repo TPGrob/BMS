@@ -22,7 +22,7 @@ namespace BMS.DA
     
         public int Id { get; set; }
         public string Naam { get; set; }
-        public Nullable<System.DateTime> TS { get; set; }
+        public string TS { get; set; }
         public int BierkroegId { get; set; }
     
         public virtual Bierkroeg Bierkroeg { get; set; }

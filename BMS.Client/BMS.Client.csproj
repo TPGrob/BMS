@@ -102,11 +102,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BierkoregProductenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BierkroegUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BierkroegWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrouwerijUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,15 +130,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BierkoregProductenWindow.xaml.cs">
+      <DependentUpon>BierkoregProductenWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BierkroegUC.xaml.cs">
       <DependentUpon>BierkroegUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="BierkroegWindow.xaml.cs">
       <DependentUpon>BierkroegWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrouwerijUC.xaml.cs">
+      <DependentUpon>BrouwerijUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DagenWindow.xaml.cs">
       <DependentUpon>DagenWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inhoud.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
