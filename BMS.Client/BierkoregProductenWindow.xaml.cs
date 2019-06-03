@@ -55,6 +55,7 @@ namespace BMS.Client
                     lv_producten.SelectedItems.Add((Product)lv_producten.Items[i]);
                 }
             }
+            
         }
 
         private void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
@@ -96,16 +97,13 @@ namespace BMS.Client
 
         public void save()
         {
-            try
-            {
                 _b.Producten.Clear();
                 foreach (Product p in lv_producten.SelectedItems)
                 {
                     _b.Producten.Add(p);
                 }
                 _db.SaveChanges();
-            }
-            catch (Exception) { }
+        
         }
         private void Unload(object sender, RoutedEventArgs e)
         {

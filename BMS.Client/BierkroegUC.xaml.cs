@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BMS.DA;
+using System.Threading;
 
 namespace BMS.Client
 {
@@ -24,9 +25,9 @@ namespace BMS.Client
     {
 
         BMSModelContainer _db;
-        Bierkroeg _b;
+        public  Bierkroeg _b;
         List<Bestelling> _bestellingen;
-        public System.Windows.Threading.DispatcherTimer dispatcherTimer ;
+        public System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
         public BierkroegUC(BMSModelContainer db)
         {
@@ -34,9 +35,10 @@ namespace BMS.Client
             
             InitializeComponent();
             
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 10);
+
             GetData();
-            setStats();
-            setVerkoop();
           
            
             
@@ -56,6 +58,7 @@ namespace BMS.Client
         void setData() {
             if (_b != null)
             {
+                _b = _db.Bierkroegen.First(b => b.Id == _b.Id);
                 gDagen.IsEnabled = true;
                 wpDagen.Children.Clear();
                 foreach (Dag d in _b.Dagen)
@@ -80,6 +83,7 @@ namespace BMS.Client
             lblAantalDagen.Content = _b.Dagen.Count.ToString();
             lblBieren.Content = _b.Producten.Where(p => p.ProductCategorieId == 1).Count().ToString();
             lblProducten.Content = _b.Producten.Count().ToString();
+            lbProducten.ItemsSource = _b.Producten.ToList();
         }
 
         void setVerkoop()
@@ -151,16 +155,16 @@ namespace BMS.Client
         private void BierkroegNieuw(object sender, RoutedEventArgs e)
         {
             BierkroegWindow bw = new BierkroegWindow(_db);
-            bw.ShowDialog();
-            _
+            bool? result = bw.ShowDialog();
             GetData();
-
         }
 
         private void ProductenClick(object sender, RoutedEventArgs e)
         {
             BierkoregProductenWindow bpw = new BierkoregProductenWindow(_db, _b);
             bpw.ShowDialog();
+            Thread.Sleep(2000);
+            //setData();
             setStats();
 
         }
@@ -169,7 +173,6 @@ namespace BMS.Client
         {
             DagenWindow bw = new DagenWindow(_db,_b);
             bw.ShowDialog();
-
             setData();
         }
 
@@ -189,15 +192,13 @@ namespace BMS.Client
         {
             OpdienersWindow ow = new OpdienersWindow(_db, _b);
             ow.ShowDialog();
-            GetData();
+           // GetData();
             setStats();
         }
 
         private void refreshStart(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            
             dispatcherTimer.Start();
         }
 
@@ -207,8 +208,8 @@ namespace BMS.Client
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-
             setVerkoop();
+            setStats();
         }
     }
 }
