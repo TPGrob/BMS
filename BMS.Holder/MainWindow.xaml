@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BMS.Holder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ContentRendered="ContentRenderd">
+        Title="MainWindow" Height="350" Width="525" ContentRendered="ContentRenderd" WindowState="Maximized">
     <Grid>
         <Menu Height="23" VerticalAlignment="Top">
             <MenuItem Header="Bierkroeg">
                 <MenuItem Header="Wijzig editie data" Click="Bierkroeg_Click"/>
             </MenuItem>
-
+            <MenuItem Header="Toog" Click="ToogClick"/>
+            <MenuItem Header="Keuken" Click="KeukenClick"/>
+            <MenuItem Header="Keuken" Click="StatsClick"/>
         </Menu>
         <Grid x:Name="g_Placeholder"  Background="#FF444444" Margin="0,23,0,0">
             <local:WaitUC x:Name="w_error"/>

@@ -24,6 +24,7 @@ namespace BMS.Holder
         BMSModelContainer _db;
         public Bierkroeg _bierkroeg;
         public Dag _dag;
+        UserControl _uc;
 
         public MainWindow()
         {
@@ -63,10 +64,27 @@ namespace BMS.Holder
                 return;
             }
         }
-        void switchUC()
+        void switchUC(string page = "stats")
         {
             g_Placeholder.Children.Clear();
-            
+           
+            switch (page) {
+                case "Toog":
+                    
+                break;
+                case "Keuken":
+                break;
+                case "stats":
+                    _uc = new StatsUC(_db,_bierkroeg);
+                break;
+                default:
+                    _uc = new StatsUC(_db,_bierkroeg);
+                break;
+
+            }
+            _uc.Width = g_Placeholder.Width;
+            _uc.Height = g_Placeholder.Height;
+            g_Placeholder.Children.Add(_uc);
         }
 
         private void Bierkroeg_Click(object sender, RoutedEventArgs e)
@@ -74,10 +92,25 @@ namespace BMS.Holder
             BierkroegWindows bw = new BierkroegWindows(_db, this, _bierkroeg, _dag);
             bw.ShowDialog();
             this.Title = "BMS 3.0 - editie: " + _bierkroeg.Naam + " - " + _dag.Naam;
-            switchUC();
+            
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToogClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void KeukenClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StatsClick(object sender, RoutedEventArgs e)
         {
 
         }
