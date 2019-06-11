@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/03/2019 16:24:38
+-- Date Created: 06/11/2019 11:29:14
 -- Generated from EDMX file: C:\Projects\BMS\BMS.DA\BMSModel.edmx
 -- --------------------------------------------------
 
@@ -38,9 +38,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_BierkroegDag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Dagen] DROP CONSTRAINT [FK_BierkroegDag];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OpdienerBestelling]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Bestellingen] DROP CONSTRAINT [FK_OpdienerBestelling];
-GO
 IF OBJECT_ID(N'[dbo].[FK_DagBestelling]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Bestellingen] DROP CONSTRAINT [FK_DagBestelling];
 GO
@@ -49,6 +46,12 @@ IF OBJECT_ID(N'[dbo].[FK_ProductBestellingProtuct]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProductProductCategorie]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Producten] DROP CONSTRAINT [FK_ProductProductCategorie];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BierkroegOpdiener]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Opdieneren] DROP CONSTRAINT [FK_BierkroegOpdiener];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpdienerBestelling]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bestellingen] DROP CONSTRAINT [FK_OpdienerBestelling];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Bier_inherits_Product]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Producten_Bier] DROP CONSTRAINT [FK_Bier_inherits_Product];
@@ -130,13 +133,13 @@ CREATE TABLE [dbo].[Bestellingen] (
     [Tafel] nvarchar(max)  NOT NULL,
     [Totaal] decimal(18,0)  NOT NULL,
     [IsBezorcht] bit  NOT NULL,
-    [IsBezorchtTS] datetime  NULL,
+    [IsBezorchtTS] nvarchar(max)  NULL,
     [IsKlaarKeuken] bit  NOT NULL,
-    [IsKlaarKeukenTS] datetime  NULL,
+    [IsKlaarKeukenTS] nvarchar(max)  NULL,
     [IsPrinted] bit  NOT NULL,
     [TS] nvarchar(max)  NULL,
-    [OpdienerId] int  NOT NULL,
-    [DagId] int  NOT NULL
+    [DagId] int  NOT NULL,
+    [OpdienerId] int  NULL
 );
 GO
 
@@ -144,7 +147,7 @@ GO
 CREATE TABLE [dbo].[BestellingProtucten] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Aantal] smallint  NOT NULL,
-    [Totaal] nvarchar(max)  NOT NULL,
+    [Totaal] decimal(18,0)  NOT NULL,
     [BestellingId] int  NOT NULL,
     [ProductId] int  NOT NULL
 );
@@ -391,21 +394,6 @@ ON [dbo].[Dagen]
     ([BierkroegId]);
 GO
 
--- Creating foreign key on [OpdienerId] in table 'Bestellingen'
-ALTER TABLE [dbo].[Bestellingen]
-ADD CONSTRAINT [FK_OpdienerBestelling]
-    FOREIGN KEY ([OpdienerId])
-    REFERENCES [dbo].[Opdieneren]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OpdienerBestelling'
-CREATE INDEX [IX_FK_OpdienerBestelling]
-ON [dbo].[Bestellingen]
-    ([OpdienerId]);
-GO
-
 -- Creating foreign key on [DagId] in table 'Bestellingen'
 ALTER TABLE [dbo].[Bestellingen]
 ADD CONSTRAINT [FK_DagBestelling]
@@ -464,6 +452,21 @@ GO
 CREATE INDEX [IX_FK_BierkroegOpdiener]
 ON [dbo].[Opdieneren]
     ([BierkroegId]);
+GO
+
+-- Creating foreign key on [OpdienerId] in table 'Bestellingen'
+ALTER TABLE [dbo].[Bestellingen]
+ADD CONSTRAINT [FK_OpdienerBestelling]
+    FOREIGN KEY ([OpdienerId])
+    REFERENCES [dbo].[Opdieneren]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OpdienerBestelling'
+CREATE INDEX [IX_FK_OpdienerBestelling]
+ON [dbo].[Bestellingen]
+    ([OpdienerId]);
 GO
 
 -- Creating foreign key on [Id] in table 'Producten_Bier'

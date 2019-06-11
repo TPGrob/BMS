@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.Client", "BMS.Client\BM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.Kassa", "BMS.Kassa\BMS.Kassa.csproj", "{730D63C5-EC5C-43BB-8DAD-093040F94CCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.WCF", "BMS.WCF\BMS.WCF.csproj", "{D2A7BC4B-9E8C-4622-9AEA-361D8E8EA252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMS.Holder", "BMS.Holder\BMS.Holder.csproj", "{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{730D63C5-EC5C-43BB-8DAD-093040F94CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{730D63C5-EC5C-43BB-8DAD-093040F94CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{730D63C5-EC5C-43BB-8DAD-093040F94CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A7BC4B-9E8C-4622-9AEA-361D8E8EA252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A7BC4B-9E8C-4622-9AEA-361D8E8EA252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A7BC4B-9E8C-4622-9AEA-361D8E8EA252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A7BC4B-9E8C-4622-9AEA-361D8E8EA252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

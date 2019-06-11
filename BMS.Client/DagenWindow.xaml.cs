@@ -25,6 +25,7 @@ namespace BMS.Client
 
         public DagenWindow(BMSModelContainer db, Bierkroeg b)
         {
+            // _db = new BMSModelContainer();
             _db = db;
             _b = b;
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace BMS.Client
                 d.Naam = txtBierkroegNAam.Text;
                 d.TS = DateTime.Now.ToString();
                 d.Bierkroeg = _b;
+                
 
                 _db.Dagen.Add(d);
                 _db.SaveChanges();

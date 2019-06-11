@@ -1,0 +1,17 @@
+﻿<Window x:Class="BMS.Holder.BierkroegWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BMS.Holder"
+        mc:Ignorable="d"
+        Title="Slecteer Bierkroeg" Height="137" Width="220">
+    <Grid Background="#FF444444">
+        <ComboBox x:Name="cbBierkroegen" DisplayMemberPath="Naam" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="76,14,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbBierkroegen_SelectionChanged"/>
+        <Label Content="Bierkroeg" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFAAAAAA"/>
+        <ComboBox x:Name="cbDag" DisplayMemberPath="Naam" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="76,41,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Dag" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Foreground="#FFAAAAAA"/>
+        <Button x:Name="button" Content="Ok" HorizontalAlignment="Left" Margin="121,68,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="button_Click"/>
+
+    </Grid>
+</Window>

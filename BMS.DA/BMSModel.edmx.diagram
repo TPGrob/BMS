@@ -23,11 +23,11 @@
         <InheritanceConnector EntityType="BMSModel.Bier" />
         <AssociationConnector Association="BMSModel.ProductBierkroeg" />
         <AssociationConnector Association="BMSModel.BierkroegDag" />
-        <AssociationConnector Association="BMSModel.OpdienerBestelling" />
         <AssociationConnector Association="BMSModel.DagBestelling" />
         <AssociationConnector Association="BMSModel.ProductBestellingProtuct" />
         <AssociationConnector Association="BMSModel.ProductProductCategorie" />
         <AssociationConnector Association="BMSModel.BierkroegOpdiener" />
+        <AssociationConnector Association="BMSModel.OpdienerBestelling" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

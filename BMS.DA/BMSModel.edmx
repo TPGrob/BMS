@@ -46,10 +46,6 @@
       <End Role="Bierkroeg" EntitySet="Bierkroegen" />
       <End Role="Dag" EntitySet="Dagen" />
     </AssociationSet>
-    <AssociationSet Name="OpdienerBestelling" Association="BMSModel.Store.OpdienerBestelling">
-      <End Role="Opdiener" EntitySet="Opdieneren" />
-      <End Role="Bestelling" EntitySet="Bestellingen" />
-    </AssociationSet>
     <AssociationSet Name="DagBestelling" Association="BMSModel.Store.DagBestelling">
       <End Role="Dag" EntitySet="Dagen" />
       <End Role="Bestelling" EntitySet="Bestellingen" />
@@ -65,6 +61,10 @@
     <AssociationSet Name="BierkroegOpdiener" Association="BMSModel.Store.BierkroegOpdiener">
       <End Role="Bierkroeg" EntitySet="Bierkroegen" />
       <End Role="Opdiener" EntitySet="Opdieneren" />
+    </AssociationSet>
+    <AssociationSet Name="OpdienerBestelling" Association="BMSModel.Store.OpdienerBestelling">
+      <End Role="Opdiener" EntitySet="Opdieneren" />
+      <End Role="Bestelling" EntitySet="Bestellingen" />
     </AssociationSet>
     <AssociationSet Name="FK_Bier_inherits_Product" Association="BMSModel.Store.FK_Bier_inherits_Product">
       <End Role="Product" EntitySet="Producten" />
@@ -104,13 +104,13 @@
     <Property Name="Tafel" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Totaal" Type="decimal" Nullable="false" />
     <Property Name="IsBezorcht" Type="bit" Nullable="false" />
-    <Property Name="IsBezorchtTS" Type="datetime" StoreGeneratedPattern="Computed" Nullable="true" />
+    <Property Name="IsBezorchtTS" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsKlaarKeuken" Type="bit" Nullable="false" />
-    <Property Name="IsKlaarKeukenTS" Type="datetime" StoreGeneratedPattern="Computed" Nullable="true" />
+    <Property Name="IsKlaarKeukenTS" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsPrinted" Type="bit" Nullable="false" />
     <Property Name="TS" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="OpdienerId" Type="int" Nullable="false" />
     <Property Name="DagId" Type="int" Nullable="false" />
+    <Property Name="OpdienerId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="BestellingProtucten">
     <Key>
@@ -118,7 +118,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Aantal" Type="smallint" Nullable="false" />
-    <Property Name="Totaal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Totaal" Type="decimal" Nullable="false" />
     <Property Name="BestellingId" Type="int" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
   </EntityType>
@@ -245,18 +245,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="OpdienerBestelling">
-    <End Role="Opdiener" Type="BMSModel.Store.Opdieneren" Multiplicity="1" />
-    <End Role="Bestelling" Type="BMSModel.Store.Bestellingen" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opdiener">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Bestelling">
-        <PropertyRef Name="OpdienerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="DagBestelling">
     <End Role="Dag" Type="BMSModel.Store.Dagen" Multiplicity="1" />
     <End Role="Bestelling" Type="BMSModel.Store.Bestellingen" Multiplicity="*" />
@@ -302,6 +290,18 @@
       </Principal>
       <Dependent Role="Opdiener">
         <PropertyRef Name="BierkroegId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OpdienerBestelling">
+    <End Role="Opdiener" Type="BMSModel.Store.Opdieneren" Multiplicity="0..1" />
+    <End Role="Bestelling" Type="BMSModel.Store.Bestellingen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opdiener">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bestelling">
+        <PropertyRef Name="OpdienerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -382,10 +382,6 @@
             <End Role="Bierkroeg" EntitySet="Bierkroegen" />
             <End Role="Dag" EntitySet="Dagen" />
           </AssociationSet>
-          <AssociationSet Name="OpdienerBestelling" Association="BMSModel.OpdienerBestelling">
-            <End Role="Opdiener" EntitySet="Opdieneren" />
-            <End Role="Bestelling" EntitySet="Bestellingen" />
-          </AssociationSet>
           <AssociationSet Name="DagBestelling" Association="BMSModel.DagBestelling">
             <End Role="Dag" EntitySet="Dagen" />
             <End Role="Bestelling" EntitySet="Bestellingen" />
@@ -401,6 +397,10 @@
           <AssociationSet Name="BierkroegOpdiener" Association="BMSModel.BierkroegOpdiener">
             <End Role="Bierkroeg" EntitySet="Bierkroegen" />
             <End Role="Opdiener" EntitySet="Opdieneren" />
+          </AssociationSet>
+          <AssociationSet Name="OpdienerBestelling" Association="BMSModel.OpdienerBestelling">
+            <End Role="Opdiener" EntitySet="Opdieneren" />
+            <End Role="Bestelling" EntitySet="Bestellingen" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bierkroeg">
@@ -431,9 +431,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Naam" Type="String" Nullable="false" />
           <Property Name="TS" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="Bestellingen" Relationship="BMSModel.OpdienerBestelling" FromRole="Opdiener" ToRole="Bestelling" />
           <NavigationProperty Name="Bierkroeg" Relationship="BMSModel.BierkroegOpdiener" FromRole="Opdiener" ToRole="Bierkroeg" />
           <Property Name="BierkroegId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bestellings" Relationship="BMSModel.OpdienerBestelling" FromRole="Opdiener" ToRole="Bestelling" />
         </EntityType>
         <EntityType Name="Bestelling">
           <Key>
@@ -443,16 +443,16 @@
           <Property Name="Tafel" Type="String" Nullable="false" />
           <Property Name="Totaal" Type="Decimal" Nullable="false" />
           <Property Name="IsBezorcht" Type="Boolean" Nullable="false" />
-          <Property Name="IsBezorchtTS" Type="DateTime" Nullable="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsBezorchtTS" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
           <Property Name="IsKlaarKeuken" Type="Boolean" Nullable="false" />
-          <Property Name="IsKlaarKeukenTS" Type="DateTime" Nullable="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsKlaarKeukenTS" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
           <Property Name="IsPrinted" Type="Boolean" Nullable="false" />
           <Property Name="TS" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="BestellingPrutucten" Relationship="BMSModel.BestellingBestellingPrutuct" FromRole="Bestelling" ToRole="BestellingPrutuct" />
-          <NavigationProperty Name="Opdiener" Relationship="BMSModel.OpdienerBestelling" FromRole="Bestelling" ToRole="Opdiener" />
-          <Property Name="OpdienerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dag" Relationship="BMSModel.DagBestelling" FromRole="Bestelling" ToRole="Dag" />
           <Property Name="DagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Opdiener" Relationship="BMSModel.OpdienerBestelling" FromRole="Bestelling" ToRole="Opdiener" />
+          <Property Name="OpdienerId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="BestellingProtuct">
           <Key>
@@ -460,7 +460,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Aantal" Type="Int16" Nullable="false" />
-          <Property Name="Totaal" Type="String" Nullable="false" />
+          <Property Name="Totaal" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Bestelling" Relationship="BMSModel.BestellingBestellingPrutuct" FromRole="BestellingPrutuct" ToRole="Bestelling" />
           <Property Name="BestellingId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="BMSModel.ProductBestellingProtuct" FromRole="BestellingProtuct" ToRole="Product" />
@@ -591,18 +591,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="OpdienerBestelling">
-          <End Type="BMSModel.Opdiener" Role="Opdiener" Multiplicity="1" />
-          <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opdiener">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bestelling">
-              <PropertyRef Name="OpdienerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="DagBestelling">
           <End Type="BMSModel.Dag" Role="Dag" Multiplicity="1" />
           <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="*" />
@@ -648,6 +636,18 @@
             </Principal>
             <Dependent Role="Opdiener">
               <PropertyRef Name="BierkroegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OpdienerBestelling">
+          <End Type="BMSModel.Opdiener" Role="Opdiener" Multiplicity="0..1" />
+          <End Type="BMSModel.Bestelling" Role="Bestelling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opdiener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bestelling">
+              <PropertyRef Name="OpdienerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -697,8 +697,8 @@
           <ScalarProperty Name="IsKlaarKeukenTS" ColumnName="IsKlaarKeukenTS" />
           <ScalarProperty Name="IsPrinted" ColumnName="IsPrinted" />
           <ScalarProperty Name="TS" ColumnName="TS" />
-          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
           <ScalarProperty Name="DagId" ColumnName="DagId" />
+          <ScalarProperty Name="OpdienerId" ColumnName="OpdienerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,11 +1,11 @@
-﻿<Window x:Class="BMS.Kassa.MainWindow"
+﻿<Window x:Class="BMS.Holder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BMS.Kassa"
+        xmlns:local="clr-namespace:BMS.Holder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="371.787" Width="742.169" ContentRendered="ContentRenderd" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="MainWindow" Height="350" Width="525" ContentRendered="ContentRenderd">
     <Grid>
         <Menu Height="23" VerticalAlignment="Top">
             <MenuItem Header="Bierkroeg">
@@ -17,5 +17,4 @@
             <local:WaitUC x:Name="w_error"/>
         </Grid>
     </Grid>
-    
 </Window>

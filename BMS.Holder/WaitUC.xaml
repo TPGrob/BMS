@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="BMS.Holder.WaitUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="141" Width="674">
+    <Grid Background="#FF444444">
+        <Label x:Name="txt_titel" Content="Even geduld a.u.b." HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="674" FontSize="36" FontWeight="Bold" HorizontalContentAlignment="Center" Foreground="#FFDCDADA"/>
+        <Label x:Name="txt_boodschap" Content="De database connectie wordt tot stand gebracht." HorizontalAlignment="Center" Margin="0,73,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="674" FontWeight="Bold" Foreground="#FFDCDADA" FontSize="16" Height="68"/>
+        <Image x:Name="errorIMG" HorizontalAlignment="Left" Height="99" Margin="2,10,0,0" VerticalAlignment="Top" Width="93" Source="./Resources/orange-error-256.png" Visibility="Hidden"/>
+
+    </Grid>
+</UserControl>

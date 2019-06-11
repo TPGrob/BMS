@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{730D63C5-EC5C-43BB-8DAD-093040F94CCC}</ProjectGuid>
+    <ProjectGuid>{A519B3EC-9513-42A8-AEAE-DF7D9F3B28AF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BMS.Kassa</RootNamespace>
-    <AssemblyName>BMS.Kassa</AssemblyName>
+    <RootNamespace>BMS.Holder</RootNamespace>
+    <AssemblyName>BMS.Holder</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -26,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,10 +34,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>BMS.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -53,7 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Printing" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,40 +66,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AantalToBrush.cs" />
-    <Compile Include="ByteToImage.cs" />
-    <Compile Include="CategorieUC.xaml.cs">
-      <DependentUpon>CategorieUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="KassaUC.xaml.cs">
-      <DependentUpon>KassaUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WaitUC.xaml.cs">
-      <DependentUpon>WaitUC.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="WaitUC.xaml.cs" />
     <Page Include="BierkroegWindows.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CategorieUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="KassaUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AantalToBrush.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BierkroegWindows.xaml.cs">
-      <DependentUpon>BierkroegWindows.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="BierkroegWindows.xaml.cs" />
+    <Compile Include="ByteToImage.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -144,13 +120,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BMS.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BMS.DA\BMS.DA.csproj">
       <Project>{131d1d92-ed30-4bf8-af7b-d1ede1f89cb2}</Project>
       <Name>BMS.DA</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hamburger-25357_640.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\orange-error-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\soda-25188_640.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beer-mug-35699_640.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

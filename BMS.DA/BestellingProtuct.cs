@@ -16,7 +16,7 @@ namespace BMS.DA
     {
         public int Id { get; set; }
         public short Aantal { get; set; }
-        public string Totaal { get; set; }
+        public decimal Totaal { get; set; }
         public int BestellingId { get; set; }
         public int ProductId { get; set; }
     

@@ -17,7 +17,7 @@ namespace BMS.DA
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Opdiener()
         {
-            this.Bestellingen = new HashSet<Bestelling>();
+            this.Bestellings = new HashSet<Bestelling>();
         }
     
         public int Id { get; set; }
@@ -25,8 +25,8 @@ namespace BMS.DA
         public string TS { get; set; }
         public int BierkroegId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bestelling> Bestellingen { get; set; }
         public virtual Bierkroeg Bierkroeg { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bestelling> Bestellings { get; set; }
     }
 }

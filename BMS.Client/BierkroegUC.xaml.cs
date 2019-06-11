@@ -26,6 +26,7 @@ namespace BMS.Client
 
         BMSModelContainer _db;
         public  Bierkroeg _b;
+        Bierkroeg _bk;
         List<Bestelling> _bestellingen;
         public System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
@@ -34,7 +35,9 @@ namespace BMS.Client
             _db = db;
             
             InitializeComponent();
-            
+
+          //  _db.Configuration.AutoDetectChangesEnabled = true;
+
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 10);
 
@@ -79,70 +82,69 @@ namespace BMS.Client
 
         void setStats()
         {
+            try { 
             lblOpdieners.Content = _b.Opdieners.Count().ToString();
             lblAantalDagen.Content = _b.Dagen.Count.ToString();
             lblBieren.Content = _b.Producten.Where(p => p.ProductCategorieId == 1).Count().ToString();
             lblProducten.Content = _b.Producten.Count().ToString();
-            lbProducten.ItemsSource = _b.Producten.ToList();
+            lbProducten.ItemsSource = _b.Producten.OrderBy(b=> b.ProductCategorieId).ToList();
+        }
+            catch { }
         }
 
         void setVerkoop()
         {
-            Bierkroeg bk = _db.Bierkroegen.First(b => b.Id == _b.Id);
-            List<Dag> dagen = new List<Dag>();
-            List<Bestelling> bestellingen = new List<Bestelling>();
-            int aantalbestelingen = 0;
-            int bieren = 0;
-            int keuken = 0;
-            int andere = 0;
-            decimal totaal_verkocht = 0;
+            using (BMSModelContainer db = new BMSModelContainer()) {
+                //db.Configuration.LazyLoadingEnabled = true;
+                _bk = db.Bierkroegen.First(b => b.Id == _b.Id);
 
-            foreach (CheckBox cb in wpDagen.Children)
-            {
-                if (cb.IsChecked == true)
+                List<Dag> dagen = new List<Dag>();
+                List<Bestelling> bestellingen = new List<Bestelling>();
+                int aantalbestelingen = 0;
+                int bieren = 0;
+                int keuken = 0;
+                int andere = 0;
+                decimal totaal_verkocht = 0;
+
+                foreach (CheckBox cb in wpDagen.Children)
                 {
-                    dagen.Add((Dag)cb.Tag);
+                    if (cb.IsChecked == true)
+                    {
+                        Dag d  = (Dag)cb.Tag;
+                        bestellingen.AddRange(d.Bestellingen.ToList());
+                    }
                 }
-            }
 
-
-            foreach (Dag d in bk.Dagen)
-            {
-                if (dagen.Contains(d))
+                foreach (Bestelling b in bestellingen)
                 {
-                    bestellingen.AddRange(d.Bestellingen);
+                    foreach (BestellingProtuct p in b.BestellingPrutucten)
+                    {
+                        if (p.Product.ProductCategorie.Id == 1)
+                        {
+                            bieren += p.Aantal;
+                        }
+                        if (p.Product.ProductCategorie.Id == 2)
+                        {
+                            andere += p.Aantal;
+                        }
+                        if (p.Product.ProductCategorie.Id == 3)
+                        {
+                            keuken += p.Aantal;
+                        }
+
+                    }
+                    totaal_verkocht += b.Totaal;
+                    aantalbestelingen += 1;
                 }
+
+                lblVerkopen.Content = aantalbestelingen.ToString();
+                lblBierenVerkoop.Content = bieren.ToString();
+                lblAndereVerkoop.Content = andere.ToString();
+                lblKeukenVerkoop.Content = keuken.ToString();
+                lblOmzet.Content = "€ " + totaal_verkocht.ToString();
             }
-
-
-
-            foreach (Bestelling b in bestellingen)
-            {
-                foreach (BestellingProtuct p in b.BestellingPrutucten)
-                {
-                    if (p.Product.ProductCategorie.Id == 1)
-                    {
-                        bieren += p.Aantal;
-                    }
-                    if (p.Product.ProductCategorie.Id == 2)
-                    {
-                        andere += p.Aantal;
-                    }
-                    if (p.Product.ProductCategorie.Id == 3)
-                    {
-                        keuken += p.Aantal;
-                    }
-
-                }
-                totaal_verkocht += b.Totaal;
-                aantalbestelingen += 1;
-            }
-
-            lblVerkopen.Content = aantalbestelingen.ToString();
-            lblBierenVerkoop.Content = bieren.ToString();
-            lblAndereVerkoop.Content = andere.ToString();
-            lblKeukenVerkoop.Content = keuken.ToString();
-            lblOmzet.Content = "€ " + totaal_verkocht.ToString();
+               
+          
         }
 
         private void cbBierkroeg_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -163,9 +165,9 @@ namespace BMS.Client
         {
             BierkoregProductenWindow bpw = new BierkoregProductenWindow(_db, _b);
             bpw.ShowDialog();
-            Thread.Sleep(2000);
             //setData();
             setStats();
+            _db.SaveChanges();
 
         }
 

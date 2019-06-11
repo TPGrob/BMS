@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BMS" Class="BMSClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=BMS;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BMSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Bierkroegen" Member="Bierkroegens">
+    <Type Name="Bierkroegen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Bierkroegen_Dagen" Member="Dagens" ThisKey="Id" OtherKey="BierkroegId" Type="Dagen" />
+      <Association Name="Bierkroegen_Opdieneren" Member="Opdienerens" ThisKey="Id" OtherKey="BierkroegId" Type="Opdieneren" />
+      <Association Name="Bierkroegen_ProductBierkroeg" Member="ProductBierkroegs" ThisKey="Id" OtherKey="Bierkroegen_Id" Type="ProductBierkroeg" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bestellingen" Member="Bestellingens">
+    <Type Name="Bestellingen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tafel" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Totaal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IsBezorcht" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsBezorchtTS" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsKlaarKeuken" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsKlaarKeukenTS" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsPrinted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OpdienerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DagId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Bestellingen_BestellingProtucten" Member="BestellingProtuctens" ThisKey="Id" OtherKey="BestellingId" Type="BestellingProtucten" />
+      <Association Name="Dagen_Bestellingen" Member="Dagen" ThisKey="DagId" OtherKey="Id" Type="Dagen" IsForeignKey="true" />
+      <Association Name="Opdieneren_Bestellingen" Member="Opdieneren" ThisKey="OpdienerId" OtherKey="Id" Type="Opdieneren" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Producten_Bier" Member="Producten_Biers">
+    <Type Name="Producten_Bier">
+      <Column Name="Alcohol" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Inhoud" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Aantal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BierTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BierGistingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BrouwerijId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="BierGistingen_Producten_Bier" Member="BierGistingen" ThisKey="BierGistingId" OtherKey="Id" Type="BierGistingen" IsForeignKey="true" />
+      <Association Name="BierType_Producten_Bier" Member="BierType" ThisKey="BierTypeId" OtherKey="Id" Type="BierType" IsForeignKey="true" />
+      <Association Name="Brouwerijen_Producten_Bier" Member="Brouwerijen" ThisKey="BrouwerijId" OtherKey="Id" Type="Brouwerijen" IsForeignKey="true" />
+      <Association Name="Producten_Producten_Bier" Member="Producten" ThisKey="Id" OtherKey="Id" Type="Producten" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BestellingProtucten" Member="BestellingProtuctens">
+    <Type Name="BestellingProtucten">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Aantal" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Totaal" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BestellingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Bestellingen_BestellingProtucten" Member="Bestellingen" ThisKey="BestellingId" OtherKey="Id" Type="Bestellingen" IsForeignKey="true" />
+      <Association Name="Producten_BestellingProtucten" Member="Producten" ThisKey="ProductId" OtherKey="Id" Type="Producten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BierGistingen" Member="BierGistingens">
+    <Type Name="BierGistingen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Gisting" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="BierGistingen_Producten_Bier" Member="Producten_Biers" ThisKey="Id" OtherKey="BierGistingId" Type="Producten_Bier" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BierTypes" Member="BierTypes">
+    <Type Name="BierType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="BierType_Producten_Bier" Member="Producten_Biers" ThisKey="Id" OtherKey="BierTypeId" Type="Producten_Bier" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Brouwerijen" Member="Brouwerijens">
+    <Type Name="Brouwerijen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Locatie" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Beschrijving" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Brouwerijen_Producten_Bier" Member="Producten_Biers" ThisKey="Id" OtherKey="BrouwerijId" Type="Producten_Bier" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dagen" Member="Dagens">
+    <Type Name="Dagen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="BierkroegId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Dagen_Bestellingen" Member="Bestellingens" ThisKey="Id" OtherKey="DagId" Type="Bestellingen" />
+      <Association Name="Bierkroegen_Dagen" Member="Bierkroegen" ThisKey="BierkroegId" OtherKey="Id" Type="Bierkroegen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Opdieneren" Member="Opdienerens">
+    <Type Name="Opdieneren">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TS" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="BierkroegId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Opdieneren_Bestellingen" Member="Bestellingens" ThisKey="Id" OtherKey="OpdienerId" Type="Bestellingen" />
+      <Association Name="Bierkroegen_Opdieneren" Member="Bierkroegen" ThisKey="BierkroegId" OtherKey="Id" Type="Bierkroegen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductBierkroeg" Member="ProductBierkroegs">
+    <Type Name="ProductBierkroeg">
+      <Column Name="Producten_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Bierkroegen_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Bierkroegen_ProductBierkroeg" Member="Bierkroegen" ThisKey="Bierkroegen_Id" OtherKey="Id" Type="Bierkroegen" IsForeignKey="true" />
+      <Association Name="Producten_ProductBierkroeg" Member="Producten" ThisKey="Producten_Id" OtherKey="Id" Type="Producten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductCategorieen" Member="ProductCategorieens">
+    <Type Name="ProductCategorieen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Isbier" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ProductCategorieen_Producten" Member="Productens" ThisKey="Id" OtherKey="ProductCategorieId" Type="Producten" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Producten" Member="Productens">
+    <Type Name="Producten">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductNaam" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Prijs" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Beschrijving" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="InVoorraad" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IMG" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProductCategorieId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Producten_Producten_Bier" Member="Producten_Bier" ThisKey="Id" OtherKey="Id" Type="Producten_Bier" Cardinality="One" />
+      <Association Name="Producten_BestellingProtucten" Member="BestellingProtuctens" ThisKey="Id" OtherKey="ProductId" Type="BestellingProtucten" />
+      <Association Name="Producten_ProductBierkroeg" Member="ProductBierkroegs" ThisKey="Id" OtherKey="Producten_Id" Type="ProductBierkroeg" />
+      <Association Name="ProductCategorieen_Producten" Member="ProductCategorieen" ThisKey="ProductCategorieId" OtherKey="Id" Type="ProductCategorieen" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

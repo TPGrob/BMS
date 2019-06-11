@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BMS.DA;
 
-namespace BMS.Kassa
+namespace BMS.Holder
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -66,10 +66,7 @@ namespace BMS.Kassa
         void switchUC()
         {
             g_Placeholder.Children.Clear();
-            UserControl _uc = new KassaUC(_bierkroeg, _db,_dag);
-            _uc.Width = g_Placeholder.Width;
-            _uc.Height = g_Placeholder.Height;
-            g_Placeholder.Children.Add(_uc);
+            
         }
 
         private void Bierkroeg_Click(object sender, RoutedEventArgs e)
@@ -78,6 +75,11 @@ namespace BMS.Kassa
             bw.ShowDialog();
             this.Title = "BMS 3.0 - editie: " + _bierkroeg.Naam + " - " + _dag.Naam;
             switchUC();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+
         }
     }
 }
